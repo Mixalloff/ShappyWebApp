@@ -1,0 +1,388 @@
+@import "settings.sass"
+body
+  font-family: 'Open Sans',sans-serif
+  min-width: 320px
+  position: relative
+  line-height: 1.6
+  font-size: 16px
+textarea
+  resize: none
+.btn_arrow
+  text-align: center
+  color: #ffffff
+  margin-top: 10px
+  a
+    text-decoration: none
+    color: #ffffff
+  .down
+    margin-bottom: 2px
+  i.fa-angle-down
+    font-size: 35px
+    border-radius: 50%
+    border: 1px solid #fff
+    padding: 5px 10px
+    cursor: pointer
+.top_menu
+  height: 10vh
+  background-color: #000000
+  position: fixed
+  width: 100%
+  z-index: 100
+  transition: opacity 1s ease
+  opacity: 1
+  &:hover
+    opacity: 1
+  img
+    height: 40px
+    display: inline-block
+    vertical-align: top
+    margin-top: 10px
+  a
+    text-decoration: none
+    display: inline-block
+    vertical-align: top
+    &:hover
+      text-decoration: none
+    .name
+      display: inline-block
+      font-family: 'BerlinSansFBDemi-Bold',sans-serif
+
+      span
+        font-size: 20px
+        display: block
+        margin-left: 10px
+        text-decoration: none
+        color: #ffffff
+        font-weight: bold
+      .descriptor
+        letter-spacing: 1px
+        font-size: 16px
+        font-family: 'BerlinSansFB-Reg',sans-serif
+header
+  height: 110vh
+  background: linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),url("../img/bgc.jpg")
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center 40px
+  position: relative
+
+  .bottom_mnu
+    font-family: 'BerlinSansFBDemi-Bold',sans-serif
+    padding-top: 25vh
+    h1
+      color: #fff
+      text-transform: uppercase
+      font-weight: normal
+      line-height: 1.5
+      text-align: left
+      margin-bottom: 0
+      font-size: 60px
+    h3
+      margin-top: 0
+      color: #fff
+      text-align: left
+nav,.bottom_mnu,.hidden-menu
+  text-align: center
+  ul
+    list-style-type: none
+    padding: 0
+    margin: 0
+    li
+      display: inline-block
+      a
+        color: #ffffff
+        line-height: 65px
+        padding: 0 20px
+        +mt(.3s)
+        text-transform: uppercase
+        letter-spacing: 1px
+        font-size: 12px
+        &:hover
+          text-decoration: none
+    li.active
+      a
+        color: rgb(51, 122, 183)
+.hidden-menu
+  margin: 0
+  padding: 0
+  display: none
+  ul
+    li
+      display: block
+      background-color: #000000
+      a
+        line-height: 40px
+.bottom_mnu
+  position: relative
+  ul
+    text-align: left
+    margin-top: 65px
+    color: #ffffff
+    li
+      font-family: 'BerlinSansFBDemi-Bold',sans-serif
+      display: block
+      line-height: 2
+      font-size: 20px
+      i
+        color: #000000
+        border-radius: 50%
+        padding: 10px
+        background-color: #ffffff
+        margin-right: 10px
+        margin-bottom: 10px
+        &.fa-tag
+          padding: 12px
+        &.fa-map-marker
+          padding: 10px 15px
+        &.fa-gift
+          padding: 12px
+
+.scrolled
+  opacity: 0.6
+.button_wrapper
+  text-align: center
+  padding-top: 25px
+.button
+  padding: 10px 50px
+  border: none
+  background: linear-gradient(to top, #026705, #18CC4A)
+  color: #ffffff
+  text-transform: uppercase
+  font-size: 12px
+  font-weight: bold
+  letter-spacing: 2px
+  +mt(.3s)
+  &:hover
+    background: linear-gradient(to top, #0b6702, #61cc6d)
+  &:active
+    background: linear-gradient(to top, #026705, #18CC4A)
+    transform: translateY(3px)
+    outline: none
+
+input,select,textarea
+  display: block
+  width: 100%
+  margin-bottom: 10px
+  text-indent: 10px
+  padding: 2px 0
+  &:focus
+    border: 2px solid $btn
+    outline: none
+form
+  text-align: center
+  padding: 20px 30px
+  background-color: rgba(255,255,255,.6)
+  h4
+    text-transform: uppercase
+    letter-spacing: 2px
+  button
+    width: 70%
+    margin-bottom: 5px
+button[href='#signup'], #signup button
+  background: linear-gradient(to top, #0b24ff, #3eacff)
+  &:hover
+    background: linear-gradient(to top, #0e07ff, #26d8ff)
+  &:active
+    background: linear-gradient(to top, #0b24ff, #3eacff)
+    transform: translateY(3px)
+    outline: none
+#signin
+  margin-top: 40px
+#signup
+  button
+    width: 100%
+
+.toggle-mnu
+  position: absolute
+  top: 0
+  right: 20px
+  display: block
+  width: 28px
+  height: 28px
+  margin-top: 14px
+
+  span:after, span:before
+    content: ""
+    position: absolute
+    left: 0
+    top: 9px
+  span:after
+    top: 18px
+  span
+    position: relative
+    display: block
+  span, span:after, span:before
+    width: 100%
+    height: 2px
+    background-color: #fff
+    +mt(0.3s)
+    backface-visibility: hidden
+    border-radius: 2px
+  &.on span
+    background-color: transparent
+  &.on span:before
+    transform: rotate(45deg) translate(-1px, 0px)
+  &.on span:after
+    transform: rotate(-45deg) translate(6px, -7px)
+
+section
+  padding-top: 40px
+  padding-bottom: 10px
+  p,i
+    color: #000000
+  .fa-angle-down
+    border: 1px solid #000 !important
+  h2
+    text-align: center
+    margin-bottom: 40px
+    text-transform: uppercase
+.advantages,.partners
+  .item
+    text-align: center
+    margin-bottom: 10px
+    font-size: 15px
+    p
+      margin-top: 20px
+      padding: 0 20px
+    i
+      font-size: 40px
+      color: #4078c0
+      border: 1px solid #ccc
+      border-radius: 50%
+      padding: 30px
+      cursor: pointer
+      &.fa-mobile, &.fa-map-marker
+        padding-left: 40px
+        padding-right: 40px
+  .cntr
+    position: relative
+    img.center_logo
+      max-width: 100%
+      margin-bottom: 30px
+    .arrow
+      height: 110px
+      position: absolute
+    .arrow1
+      right: 100px
+      top: -140px
+    .arrow2
+      transform: rotate(180deg)
+      right: -140px
+      bottom: -110px
+    .arrow3
+      transform: scale(-1,1)
+      left: 100px
+      top: -140px
+    .arrow4
+      transform: scale(-1,1) rotate(180deg)
+      left: -140px
+      bottom: -110px
+.partners
+  h4
+    text-align: center
+    margin-bottom: 40px
+    text-transform: uppercase
+  h2
+    margin-bottom: 0
+  .group
+    text-align: center
+    img
+      margin-bottom: 10px
+      max-width: 100%
+    a
+      text-transform: uppercase
+      font-size: 15px
+      text-decoration: underline
+  .fa.crm,.fa.online
+    font-size: 20px
+    font-weight: bold
+    padding: 40px 30px
+.instruct
+  img
+    width: 100%
+  ol
+    li
+      margin-bottom: 40px
+    a
+      img
+        width: 120px
+.abilities
+  img
+    max-width: 100%
+  .description
+    text-align: justify
+  span.head
+    text-transform: uppercase
+    font-size: 35px
+    font-weight: bold
+    display: block
+    text-align: center
+    margin-top: 120px
+  .points
+    position: relative
+    ul
+      margin: 20px 0
+      padding: 0
+      list-style-type: none
+      text-align: center
+      li
+        display: inline-block
+        text-transform: uppercase
+        font-size: 20px
+        padding: 0 30px
+        cursor: pointer
+        +mt(.3s)
+        &:hover
+          text-decoration: underline
+        &.active
+          color: $btn
+    .fa
+      position: absolute
+      font-size: 30px
+      cursor: pointer
+      color: $btn
+      top: 0
+      &.fa-arrow-left
+        left: 0
+      &.fa-arrow-right
+        right: 0
+.callback
+  text-align: center
+  input,textarea
+    width: 70%
+    margin: 15px auto
+.contacts
+  font-family: 'BerlinSansFBDemi-Bold',sans-serif
+  text-align: center
+  padding-bottom: 70px
+  i
+   border: 1px solid #000
+   border-radius: 50%
+   padding: 20px
+   margin: 0 25px
+   font-size: 20px
+   cursor: pointer
+   &.fa-google-plus
+     padding: 20px 18px
+
+   &.fa-facebook
+     padding: 20px 25px
+  p
+    margin-top: 25px
+
+.verify
+  text-align: center
+  img
+    width: 90px
+    height: auto
+
+
+
+
+
+
+
+
+
+
+

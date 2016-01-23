@@ -1,0 +1,343 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title Главная
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width,initial-scale=1, maximum-scale=1')
+        link(rel='stylesheet', href='../libs/bootstrap/dist/css/bootstrap.min.css')
+        link(rel='stylesheet', href='../libs/fancybox/source/jquery.fancybox.css')
+        link(rel='stylesheet', href='../css/fonts.css')
+        link(rel='stylesheet', href='../css/main.css')
+        link(rel='stylesheet', href='../css/font-awesome.css')
+        link(rel='stylesheet', href='../libs/alertify/alertify.min.css')
+        link(rel='stylesheet', href='../libs/OwlCarousel/owl-carousel/owl.carousel.css')
+        link(rel='stylesheet', href='../libs/OwlCarousel/owl-carousel/owl.theme.css')
+        link(rel='stylesheet', href='../css/media.css')
+        link(rel='icon', type='image/ico', href='../favicon.ico')
+        style.
+            #page-preloader {
+                position: fixed;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                background: #000;
+                z-index: 100500;
+            }
+            #page-preloader .spinner {
+                width: 32px;
+                height: 32px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                background: url('../img/spinner.gif') no-repeat 50% 50%;
+                margin: -16px 0 0 -16px;
+            }
+    body#body
+        #page-preloader
+            span.spinner
+        .container-fluid
+            .row
+                .top_menu.fixed
+                    .col-md-4
+                        a(href='main.html')
+                            img(src='../img/logo.png', alt='brand')
+                            .name
+                                span Shappy
+                                span.descriptor Your shopping with happy
+                    nav.col-md-8.col-sm-12.hidden-sm.hidden-xs.menu
+                        ul
+                            li.active
+                                a(href='#body') Главная
+                            li
+                                a(href='#advantages') Что такое SHAPPY?
+                            li
+                                a(href='#instruct') Как работает
+                            li
+                                a(href='#abilities') Возможности
+                            li
+                                a(href='#partners') Партнерам
+                    a.toggle-mnu.hidden-lg.hidden-md(href='#')
+                        span
+                    nav.col-sm-12.col-xs-12.hidden-lg.hidden-md.hidden-menu
+                        ul
+                            li.active
+                                a(href='#body') Главная
+                            li
+                                a(href='#advantages') Что такое SHAPPY?
+                            li
+                                a(href='#instruct') Как работает
+                            li
+                                a(href='#abilities') Возможности
+                            li
+                                a(href='#partners') Партнерам
+        header
+            .container
+                .row
+                    .bottom_mnu.clearfix
+                        .col-md-8.col-sm-12
+                            h1 SHAPPY
+                            h3 Your shopping with happy
+                            ul.points
+                                li
+                                    i.fa.fa-tag
+                                    | Ищи скидки
+                                li
+                                    i.fa.fa-map-marker
+                                    | Выбирай ближайше магазины
+                                li
+                                    i.fa.fa-group
+                                    | Сохраняй и делись с друзьями
+                                li
+                                    i.fa.fa-gift
+                                    | Дари подарки и сертификаты
+                        .col-md-4.col-sm-12
+                            form#signin
+                                h4 Войти в Shappy
+                                input(type='text', placeholder='Логин', name='login', autofocus='')
+                                input(type='password', placeholder='Пароль', name='password')
+                                button.button(type='submit') Войти
+                                button.button.fancybox(href='#signup') Регистрация
+                                #spinner_login
+                    .btn_arrow
+                        a(href='#advantages')
+                            p.down Что такое SHAPPY?
+                            i.fa.fa-angle-down
+        section#advantages.advantages
+            .container
+                .row
+                    h2 Что такое SHAPPY?
+                    .col-md-5.col-sm-5.col-xs-12
+                        .item
+                            i.fa.fa-tag
+                            p
+                                | SHAPPY - это возможность всегда быть в курсе лучших предложений и скидок в своем городе.
+                                | Выберите любимые магазины и получайте уведомления обо всех выгодных акциях.
+                    .col-md-offset-2.col-sm-offset-2.col-md-5.col-sm-5.col-xs-12
+                        .item
+                            i.fa.fa-map-marker
+                            p
+                                | SHAPPY - это все магазины, в которых можно недорого купить полезные вещи. Узнай где скрываются
+                                | лучшие цены и вопспользуйся выгодными предложениями.
+                .row
+                    .col-md-offset-5.col-sm-offset-5.col-md-2.col-sm-2.hidden-xs
+                        .cntr
+                            img.center_logo(src='../img/logo.png', alt='logo')
+                            img.hidden-sm.arrow.arrow1(src='../img/arrow.png', alt='arrow1')
+                            img.hidden-sm.arrow.arrow2(src='../img/arrow.png', alt='arrow2')
+                            img.hidden-sm.arrow.arrow3(src='../img/arrow.png', alt='arrow3')
+                            img.hidden-sm.arrow.arrow4(src='../img/arrow.png', alt='arrow4')
+                .row
+                    .col-md-5.col-sm-5.col-xs-12
+                        .item
+                            i.fa.fa-users
+                            p
+                                | SHAPPY - это социальная сеть для любителей шоппинга. Добавляй на стену акции, чтобы вопспользоваться
+                                | интересными предложениями, елись ими со знакомыми и зарабатывай бонусные баллы.
+                                | Получай максимум удовольствия от покупо вмсте с друзями.
+                    .col-md-offset-2.col-sm-offset-2.col-md-5.col-sm-5.col-xs-12
+                        .item
+                            i.fa.fa-gift
+                            p
+                                | SHAPPY - это система, позволяющая получать и дарить подарки дистанционно находясь в любой точке мира.
+                                | Копите бонусные баллы и оплачивайте ими 100% покупок. А если не знаете что подарить другу, отправьте
+                                | ему элекронны сертификат.
+            .btn_arrow
+                a(href='#instruct')
+                    p.down Как это работает?
+                    i.fa.fa-angle-down
+        hr
+        section#instruct.instruct
+            .container-fluid
+                .row
+                    h2 Как это работает
+                    .col-md-6.col-sm-6.col-xs-12
+                        img(src='../img/comptel.jpg', alt='view')
+                    .col-md-6.col-sm-6.col-xs-12
+                        ol
+                            li
+                                | Скачайте приложение для Вашего мобильного устройства
+                                a(href='')
+                                    img(src='../img/googleplay.png', alt='googleplay')
+                            li Зарегистрируйтесь
+                            li Введите Ваш логин и пароль и войдите
+                            li Ваберите Ваш регион
+                            li(style='margin-bottom: 0') Поздравляем! Теперь вы всегда будете в курсе всех выгодных акций и предложений
+            .btn_arrow
+                a(href='#abilities')
+                    p.down Возможности
+                    i.fa.fa-angle-down
+        hr
+        section#abilities.abilities
+            .container
+                h2 Возможности
+                #owl.owl-carousel
+                    // first slide
+                    .row
+                        .col-md-3
+                            span.head Акции
+                        .col-md-4
+                            img(src='../img/tel.png', alt='phone')
+                        .col-md-5
+                            p.description
+                                | Просматривайте все лучшие акции на Вашем мобильном устройстве. Будьте всегда в курсе
+                                | новинок и распродаж. Первым узнайте о специальных предложениях где бы вы не находились.
+                                br
+                                br
+                                |                             Вы можете просматривать акции конкретной компании либо отдельной категории (одежда, продукты, спорт и т.д.).
+                                br
+                                br
+                                |                             Находите только актуальные для Вас предложения, пользуясь фильтрами.
+                    // second slide
+                    .row
+                        .col-md-3
+                            span.head Подписки
+                        .col-md-4
+                            img(src='../img/tel.png', alt='phone')
+                        .col-md-5
+                            p.description
+                                | Подпивайтесь на любимые компании и категории, чтобы не пропустить очередные скидки. Покупайте только по выгодным ценам,
+                                | сравнивая предложения в магазинах с аналогичными катеориями.
+                                br
+                                br
+                                |                             Управляйте Вашими уведомлениями. Скажите НЕТ надоедливому спаму! Получайте только полезные для
+                                |                             Вас новости, настроив подписки под себя.
+                    // third slide
+                    .row
+                        .col-md-3
+                            span.head Друзья
+                        .col-md-4
+                            img(src='../img/tel.png', alt='phone')
+                        .col-md-5
+                            p.description
+                                | Добавляйте знакомых и будьте в курсе предпочтений. Узнайте что им интересно, чтобы сделать подарок, либо сами вопспользуйтесь понравившейся акцией друга.
+                                br
+                                br
+                                |                             Делитесь понравившемися акциями с друзьями и получайте бонусные баллы. Если друг воспользовался присланной акцией, Вы получаете ещё больше баллов.
+                    // fourth slide
+                    .row
+                        .col-md-3
+                            span.head Покупки в приложении
+                        .col-md-4
+                            img(src='../img/tel.png', alt='phone')
+                        .col-md-5
+                            p.description
+                                | Сделайте заказ товаров прямо из приложения не выходя из дома. Используйте доступные каталоги и, заполнив форму с данными, совершайте покупки
+                                | с доставкой в удобное для Вас место.
+                                br
+                                br
+                                |                             Не знаете что подарить другу? А он ещё и живет в другом городе...Предлагаем Вам универсальный подарок - электронны сертификат в любимом магазине.
+                                |                             Необходимл лишь оплатить его со своей карты и отправить другу в приложении. Если он ещё не зарегистрирован, тогда на электронную почту отправится ссылка для установки приложения,
+                                |                             где он и найдет Ваш подарок!
+                    // fifth slide
+                    .row
+                        .col-md-3
+                            span.head Бонусные баллы
+                        .col-md-4
+                            img(src='../img/tel.png', alt='phone')
+                        .col-md-5
+                            p.description
+                                | Покупате больше, используя акции из приложения, делитесь с друзьями понравившемися предложениями и вы получите бонусные баооы, которые позволят Вам оплатить до 100% попкупки.
+                .row
+                    .points
+                        ul
+                            li.active Акции
+                            li Подписки
+                            li Друзья
+                            li Покупки в приложении
+                            li Бонусные баллы
+                        i#prev.fa.fa-arrow-left
+                        i#next.fa.fa-arrow-right
+            .btn_arrow
+                a(href='#partners')
+                    p.down Партнерам
+                    i.fa.fa-angle-down
+        hr
+        section#partners.partners
+            .container-fluid
+                .row
+                    h2 Партнерам
+                    h4 Что дает SHAPPY партнерам
+                    .col-md-4.col-sm-4.col-xs-12
+                        .item
+                            i.fa.fa-bullhorn
+                            p Новый широкий канал недорогой рекламы
+                    .col-md-4.col-sm-4.col-xs-12
+                        .item
+                            i.fa.fa-group
+                            p Наработанная клиентская база заинтересованных пользвателей
+                    .col-md-4.col-sm-4.col-xs-12
+                        .item
+                            i.fa.fa-bullseye
+                            p Целевая аудитория сама находит Вас!
+                .row
+                    .col-md-5.col-sm-4.col-xs-12
+                        .item
+                            i.fa.crm CRM
+                            p
+                                | Доступ CRM системы, которая позволит вести учет трафика клиентов и конверсии внтури системы.
+                                | Также она предоставляет аналитику по многим другим показателям как внутри компании, так и
+                                | по рынку в целом
+                    .col-md-2.col-sm-4.col-xs-12
+                        .group
+                            img(src='../img/logo.png', alt='logo')
+                            a(href='') условия сотрудничества
+                    .col-md-5.col-sm-4.col-xs-12
+                        .item
+                            i.fa.online online
+                            p
+                                | Площадка для онлайн-торговли. Возможность продавать "как электронные сертификаты"(универсальные модильные подарки),
+                                | так и другие товары по заказу прямо из приложения
+            .btn_arrow
+                a(href='#callback')
+                    p.down Форма обратной связи
+                    i.fa.fa-angle-down
+        section#callback.callback
+            .container
+                .row
+                    h2 Если есть вопросы, напишите нам!
+                    input(type='text', placeholder='Ваше имя')
+                    input(type='text', placeholder='Email')
+                    textarea(name='', id='', cols='30', rows='10', placeholder='Сообщение')
+            .btn_arrow
+                a(href='#contacts')
+                    p.down Контакты
+                    i.fa.fa-angle-down
+        section#contacts.contacts
+            .container
+                .row
+                    h2 Shappy
+                    i.fa.fa-facebook
+                    i.fa.fa-google-plus
+                    i.fa.fa-twitter
+                    i.fa.fa-vk
+                    p Copyright © Shappy
+        form#signup(style='display: none', enctype='multipart/form-data')
+            h4 Регистрация компании
+            input(type='text', placeholder='Логин', name='login', required='')
+            input(type='password', placeholder='Пароль', name='password', required='')
+            input(type='text', placeholder='Название', name='name', required='')
+            input(type='email', placeholder='Email', name='email')
+            input(type='text', placeholder='ИНН')
+            input(type='text', placeholder='ОГРН')
+            select
+                option Продуктовая
+                option Одежда
+                option Сантехника
+            input(type='text', placeholder='Регион')
+            input(type='text', placeholder='Адрес')
+            input(type='file', name='logo', multiple='')
+            button.button(type='submit') Зарегистрировать
+            #spinner_register
+        script(src='../libs/jquery/dist/jquery.js')
+        script(src='../libs/bootstrap/dist/js/bootstrap.min.js')
+        script(src='../libs/fancybox/source/jquery.fancybox.js')
+        script(src='../libs/fancybox/source/jquery.fancybox.pack.js')
+        script(src='../libs/OwlCarousel/owl-carousel/owl.carousel.min.js')
+        script(src='../js/cookie.js')
+        script(src='../libs/spinner/spin.js')
+        script(src='../js/controllers/auth.js')
+        script(src='../js/config.js')
+        script(src='../js/Error.js')
+        script(src='../libs/alertify/alertify.js')

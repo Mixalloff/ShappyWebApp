@@ -1,0 +1,169 @@
+@import "settings.sass"
+body
+  font-size: 12px
+  font-family: 'Open Sans',sans-serif
+.collaps
+  width: 40px
+.expand
+  width: 150px
+.header
+  height: 70px
+  background-color: $second-color
+  border: 1px solid $border-color
+  img
+    display: inline-block
+    height: 60px
+    vertical-align: middle
+    margin-top: 3px
+  span
+    vertical-align: middle
+    display: inline-block
+    text-transform: uppercase
+    margin-left: 10px
+.menu
+  margin-top: 20px
+  ul
+    list-style-type: none
+    margin: 0
+    padding: 0
+    li
+      position: relative
+      text-align: center
+      color: #fff
+      background-color: $main-color
+      cursor: pointer
+      width: 65px
+      padding: 15px 0
+      transition: all .5s ease
+      display: inline-block
+      &:hover
+        background-color: $main-hover
+      i
+        font-size: 30px
+    .hint
+      position: absolute
+      padding: 14px
+      background-color: $main-color
+      width: 120px
+      color: #ffffff
+      font-size: 16px
+      display: inline-block
+      text-align: center
+      font-weight: bold
+      z-index: 100
+.stats
+  height: 500px
+  margin-top: 20px
+
+h4
+  margin: 0 !important
+  font-family: 'Open Sans',sans-serif
+  text-transform: uppercase
+.stock_part
+  position: relative
+  .stocks
+    height: 410px
+    overflow: auto
+  .stocks_head
+    h4
+      margin-top: 20px !important
+      margin-bottom: 10px !important
+      display: inline-block
+    span
+      cursor: pointer
+      margin-left: 20px
+      i
+        font-size: 12px
+        color: #000000
+        display: inline-block
+        margin-left: 3px
+    input
+      margin-bottom: 10px
+  .stock
+    height: 200px
+    border: 1px solid $border-color
+    background-color: $second-color
+    background-size: auto 100% !important
+    background-repeat: no-repeat !important
+    background-position:  top center !important
+    margin: 0 10px 10px 10px
+    padding: 10px
+    padding-bottom: 0
+    position: relative
+    font-weight: bold
+    cursor: pointer
+    &:hover .stock_header
+      position: relative
+      z-index: 100
+    &:hover i
+      z-index: 101
+      color: #ffffff
+    &:hover .date_wrapper
+      color: #ffffff
+    &:hover .stock_header
+      transform: translateY(-60px)
+      transition: all .35s ease
+
+    &:hover .stock_descr
+      opacity: 1
+      transform: scale(1)
+    .stock_header
+      color: #fff
+      font-size: 28px
+      text-shadow: #000 1px 0px, #000 1px 1px, #000 0px 1px, #000 -1px 1px, #000 -1px 0px, #000 -1px -1px, #000 0px -1px, #000 1px -1px
+      text-align: center
+      margin-top: 50px
+    .stock_descr
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      background-color: rgba(0, 0, 0, .4)
+      color: #ffffff
+      text-align: center
+      opacity: 0
+      transition: all .5s ease
+      padding-top: 80px
+      transform: scale(0)
+
+    .date_wrapper
+      position: absolute
+      bottom: 5px
+      right: 5px
+      font-size: 10px
+    a
+      i
+        position: absolute
+        top: 5px
+        right: 5px
+        font-size: 20px
+        color: red
+        cursor: pointer
+      &.remove
+        i
+          left: 5px
+          font-size: 20px
+          width: 20px
+    input
+      margin: 0 50px
+  a.down_arrow
+    i
+      position: absolute
+      bottom: -45px
+      right: 45%
+      cursor: pointer
+      font-size: 50px
+      color: $main-color
+#stock, #edit
+  display: none
+  text-align: center
+  h4
+    text-align: center
+    margin-bottom: 10px !important
+  input,textarea
+    margin-bottom: 10px !important
+
+#logout
+  float: right
+  margin-top: 15px

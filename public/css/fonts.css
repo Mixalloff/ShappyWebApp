@@ -1,0 +1,30 @@
+/* font-family: "OpenSansRegular"; */
+@font-face {
+    font-family: "OpenSansRegular";
+    src: url("../fonts/OpenSansRegular/OpenSansRegular.eot");
+    src: url("../fonts/OpenSansRegular/OpenSansRegular.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/OpenSansRegular/OpenSansRegular.woff") format("woff"),
+    url("../fonts/OpenSansRegular/OpenSansRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "BerlinSansFBDemi-Bold";
+    src: url("../fonts/BerlinSansBold/BerlinSansFBDemi-Bold.eot");
+    src: url("../fonts/BerlinSansBold/BerlinSansFBDemi-Bold.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/BerlinSansBold/BerlinSansFBDemi-Bold.woff") format("woff"),
+    url("../fonts/BerlinSansBold/BerlinSansFBDemi-Bold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "BerlinSansFB-Reg";
+    src: url("../fonts/BerlinSansReg/BerlinSansFB-Reg.eot");
+    src: url("../fonts/BerlinSansReg/BerlinSansFB-Reg.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/BerlinSansReg/BerlinSansFB-Reg.woff") format("woff"),
+    url("../fonts/BerlinSansReg/BerlinSansFB-Reg.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}

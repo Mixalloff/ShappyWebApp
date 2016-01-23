@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="../libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../libs/fancybox/source/jquery.fancybox.css">
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/font-awesome.css">
+    <link rel="stylesheet" href="../libs/alertify/alertify.min.css">
+    <link rel="stylesheet" href="../libs/OwlCarousel/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="../libs/OwlCarousel/owl-carousel/owl.theme.css">
+    <link rel="stylesheet" href="../css/media.css">
+
+    <link rel="icon" type="image/ico" href="../favicon.ico"/>
+    <style>
+        #page-preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: #000;
+            z-index: 100500;
+        }
+
+        #page-preloader .spinner {
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            background: url('../img/spinner.gif') no-repeat 50% 50%;
+            margin: -16px 0 0 -16px;
+        }
+    </style>
+</head>
+<body id="body">
+<div id="page-preloader"><span class="spinner"></span></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="top_menu fixed">
+                <div class="col-md-4">
+
+                    <a href="main.html">
+                        <img src="../img/logo.png" alt="brand">
+                        <div class="name">
+                            <span>Shappy</span>
+                            <span class="descriptor">Your shopping with happy</span>
+                        </div>
+
+                    </a>
+                </div>
+                    <nav class="col-md-8 col-sm-12 hidden-sm hidden-xs menu" >
+                        <ul>
+                            <li class="active"><a href="#body">Главная</a></li>
+                            <li><a href="#advantages">Что такое SHAPPY?</a></li>
+                            <li><a href="#instruct">Как работает</a></li>
+                            <li><a href="#abilities">Возможности</a></li>
+                            <li><a href="#partners">Партнерам</a></li>
+                        </ul>
+                    </nav>
+                <a href="#" class="toggle-mnu hidden-lg hidden-md"><span></span></a>
+                <nav class="col-sm-12 col-xs-12 hidden-lg hidden-md hidden-menu" >
+                    <ul>
+                        <li class="active"><a href="#body">Главная</a></li>
+                        <li><a href="#advantages">Что такое SHAPPY?</a></li>
+                        <li><a href="#instruct">Как работает</a></li>
+                        <li><a href="#abilities">Возможности</a></li>
+                        <li><a href="#partners">Партнерам</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            </div>
+        </div>
+    <header>
+        <div class="container">
+            <div class="row">
+
+                <div class="bottom_mnu clearfix">
+
+                        <div class="col-md-8 col-sm-12">
+                            <h1>SHAPPY</h1>
+                            <h3>Your shopping with happy</h3>
+                            <ul class="points">
+                                <li><i class="fa fa-tag"></i>Ищи скидки</li>
+                                <li><i class="fa fa-map-marker"></i>Выбирай ближайше магазины</li>
+                                <li><i class="fa fa-group"></i>Сохраняй и делись с друзьями</li>
+                                <li><i class="fa fa-gift"></i>Дари подарки и сертификаты</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 col-sm-12 ">
+                            <form id="signin">
+                                <h4>Войти в Shappy</h4>
+                                <input type="text"  placeholder="Логин" name="login" autofocus>
+                                <input type="password" placeholder="Пароль" name="password">
+                                <button class="button" type="submit">Войти</button>
+                                <button href="#signup" class="button fancybox" >Регистрация</button>
+                                <div id="spinner_login"></div>
+                            </form>
+                        </div>
+
+                </div>
+
+                <div class="btn_arrow" >
+                    <a href="#advantages">
+        <p class="down">Что такое SHAPPY?</p>
+        <i class="fa fa-angle-down"></i>
+                    </a>
+                    </div>
+
+            </div>
+            </div>
+
+    </header>
+
+    <section class="advantages" id="advantages">
+        <div class="container">
+            <div class="row">
+                    <h2>Что такое SHAPPY?</h2>
+
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                        <div class="item">
+                        <i class="fa fa-tag"></i>
+                            <p>SHAPPY - это возможность всегда быть в курсе лучших предложений и скидок в своем городе.
+                                Выберите любимые магазины и получайте уведомления обо всех выгодных акциях.</p>
+                        </div>
+                    </div>
+
+                <div class="col-md-offset-2 col-sm-offset-2 col-md-5 col-sm-5 col-xs-12 ">
+                    <div class="item">
+                        <i class="fa fa-map-marker"></i>
+                        <p>SHAPPY - это все магазины, в которых можно недорого купить полезные вещи. Узнай где скрываются
+                            лучшие цены и вопспользуйся выгодными предложениями.</p>
+                    </div>
+                </div>
+                </div>
+            <div class="row">
+                        <div class="col-md-offset-5 col-sm-offset-5 col-md-2 col-sm-2 hidden-xs">
+                            <div class="cntr">
+                                <img src="../img/logo.png" alt="logo" class="center_logo">
+                                <img class="hidden-sm arrow arrow1" src="../img/arrow.png" alt="arrow1">
+                                <img class="hidden-sm arrow arrow2" src="../img/arrow.png" alt="arrow2">
+                                <img class="hidden-sm arrow arrow3" src="../img/arrow.png" alt="arrow3">
+                                <img class="hidden-sm arrow arrow4" src="../img/arrow.png" alt="arrow4">
+                            </div>
+
+                        </div>
+            </div>
+            <div class="row">
+                    <div class="col-md-5 col-sm-5 col-xs-12 ">
+                        <div class="item">
+                        <i class="fa fa-users"></i>
+                            <p>SHAPPY - это социальная сеть для любителей шоппинга. Добавляй на стену акции, чтобы вопспользоваться
+                                интересными предложениями, елись ими со знакомыми и зарабатывай бонусные баллы.
+                                Получай максимум удовольствия от покупо вмсте с друзями.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-offset-2 col-sm-offset-2 col-md-5 col-sm-5 col-xs-12 ">
+                        <div class="item">
+                            <i class="fa fa-gift"></i>
+                            <p>SHAPPY - это система, позволяющая получать и дарить подарки дистанционно находясь в любой точке мира.
+                                Копите бонусные баллы и оплачивайте ими 100% покупок. А если не знаете что подарить другу, отправьте
+                                ему элекронны сертификат.</p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="btn_arrow">
+            <a href="#instruct">
+            <p class="down">Как это работает?</p>
+            <i class="fa fa-angle-down"></i>
+            </a>
+        </div>
+
+    </section>
+    <hr>
+
+    <section class="instruct" id="instruct">
+        <div class="container-fluid">
+            <div class="row">
+                <h2>Как это работает</h2>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <img src="../img/comptel.jpg" alt="view">
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <ol>
+                        <li>Скачайте приложение для Вашего мобильного устройства
+                            <a href="#"><img src="../img/googleplay.png" alt="googleplay"></a>
+                        </li>
+
+                        <li>Зарегистрируйтесь</li>
+                        <li>Введите Ваш логин и пароль и войдите</li>
+                        <li>Ваберите Ваш регион</li>
+                        <li style="margin-bottom: 0">Поздравляем! Теперь вы всегда будете в курсе всех выгодных акций и предложений</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="btn_arrow">
+            <a href="#abilities">
+        <p class="down">Возможности</p>
+        <i class="fa fa-angle-down"></i>
+            </a>
+            </div>
+    </section>
+    <hr>
+    <section class="abilities" id="abilities">
+        <div class="container">
+            <h2>Возможности</h2>
+            <div id="owl" class="owl-carousel">
+
+                <!--first slide-->
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <span class="head">Акции</span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <img src="../img/tel.png" alt="phone">
+                    </div>
+                    <div class="col-md-5">
+                        <p class="description">
+                            Просматривайте все лучшие акции на Вашем мобильном устройстве. Будьте всегда в курсе
+                            новинок и распродаж. Первым узнайте о специальных предложениях где бы вы не находились.
+                            <br><br>
+                            Вы можете просматривать акции конкретной компании либо отдельной категории (одежда, продукты, спорт и т.д.).
+                            <br><br>
+                            Находите только актуальные для Вас предложения, пользуясь фильтрами.
+                        </p>
+                    </div>
+                </div>
+
+                <!--second slide -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <span class="head">Подписки</span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <img src="../img/tel.png" alt="phone">
+                    </div>
+                    <div class="col-md-5">
+                        <p class="description">
+                            Подпивайтесь на любимые компании и категории, чтобы не пропустить очередные скидки. Покупайте только по выгодным ценам,
+                            сравнивая предложения в магазинах с аналогичными катеориями.
+                            <br><br>
+                            Управляйте Вашими уведомлениями. Скажите НЕТ надоедливому спаму! Получайте только полезные для
+                            Вас новости, настроив подписки под себя.
+                        </p>
+                    </div>
+                </div>
+
+                <!--third slide -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <span class="head">Друзья</span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <img src="../img/tel.png" alt="phone">
+                    </div>
+                    <div class="col-md-5">
+                        <p class="description">
+                            Добавляйте знакомых и будьте в курсе предпочтений. Узнайте что им интересно, чтобы сделать подарок, либо сами вопспользуйтесь понравившейся акцией друга.
+
+                            <br><br>
+                            Делитесь понравившемися акциями с друзьями и получайте бонусные баллы. Если друг воспользовался присланной акцией, Вы получаете ещё больше баллов.
+                        </p>
+                    </div>
+                </div>
+
+                <!--fourth slide -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <span class="head">Покупки в приложении</span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <img src="../img/tel.png" alt="phone">
+                    </div>
+                    <div class="col-md-5">
+                        <p class="description">
+                            Сделайте заказ товаров прямо из приложения не выходя из дома. Используйте доступные каталоги и, заполнив форму с данными, совершайте покупки
+                            с доставкой в удобное для Вас место.
+                            <br><br>
+                            Не знаете что подарить другу? А он ещё и живет в другом городе...Предлагаем Вам универсальный подарок - электронны сертификат в любимом магазине.
+                            Необходимл лишь оплатить его со своей карты и отправить другу в приложении. Если он ещё не зарегистрирован, тогда на электронную почту отправится ссылка для установки приложения,
+                            где он и найдет Ваш подарок!
+                        </p>
+                    </div>
+                </div>
+
+                <!--fifth slide -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <span class="head">Бонусные баллы</span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <img src="../img/tel.png" alt="phone">
+                    </div>
+                    <div class="col-md-5">
+                        <p class="description">
+                            Покупате больше, используя акции из приложения, делитесь с друзьями понравившемися предложениями и вы получите бонусные баооы, которые позволят Вам оплатить до 100% попкупки.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="points">
+                    <ul>
+                        <li class="active">Акции</li>
+                        <li>Подписки</li>
+                        <li>Друзья</li>
+                        <li>Покупки в приложении</li>
+                        <li>Бонусные баллы</li>
+                    </ul>
+                    <i class="fa fa-arrow-left" id="prev"></i>
+                    <i class="fa fa-arrow-right" id="next"></i>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="btn_arrow">
+            <a href="#partners">
+        <p class="down">Партнерам</p>
+        <i class="fa fa-angle-down"></i>
+            </a>
+            </div>
+    </section>
+    <hr>
+    <section class="partners" id="partners">
+        <div class="container-fluid">
+            <div class="row">
+                <h2>Партнерам</h2>
+                <h4>Что дает SHAPPY партнерам</h4>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="item"><i class="fa fa-bullhorn"></i>
+                        <p>Новый широкий канал недорогой рекламы</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="item"><i class="fa fa-group"></i>
+                        <p>Наработанная клиентская база заинтересованных пользвателей</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="item"><i class="fa fa-bullseye"></i>
+                        <p>Целевая аудитория сама находит Вас!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-sm-4 col-xs-12">
+                    <div class="item"><i class="fa crm">CRM</i>
+                        <p>Доступ CRM системы, которая позволит вести учет трафика клиентов и конверсии внтури системы.
+                            Также она предоставляет аналитику по многим другим показателям как внутри компании, так и
+                            по рынку в целом</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-12">
+                    <div class="group">
+                        <img src="../img/logo.png" alt="logo">
+                        <a href="#">условия сотрудничества</a>
+                    </div>
+
+                </div>
+                <div class="col-md-5 col-sm-4 col-xs-12">
+                    <div class="item"><i class="fa online">online</i>
+                        <p>Площадка для онлайн-торговли. Возможность продавать "как электронные сертификаты"(универсальные модильные подарки),
+                            так и другие товары по заказу прямо из приложения</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn_arrow">
+            <a href="#callback">
+        <p class="down">Форма обратной связи</p>
+        <i class="fa fa-angle-down"></i>
+            </a>
+            </div>
+    </section>
+
+    <section class="callback" id="callback">
+        <div class="container">
+            <div class="row">
+                <h2>Если есть вопросы, напишите нам!</h2>
+                <input type="text" placeholder="Ваше имя">
+                <input type="text" placeholder="Email">
+                <textarea name="" id="" cols="30" rows="10" placeholder="Сообщение"></textarea>
+            </div>
+        </div>
+        <div class="btn_arrow">
+            <a href="#contacts">
+            <p class="down">Контакты</p>
+            <i class="fa fa-angle-down"></i>
+            </a>
+        </div>
+    </section>
+    <section class="contacts" id="contacts">
+
+        <div class="container">
+            <div class="row">
+                <h2>Shappy</h2>
+                <i class="fa fa-facebook"></i>
+                <i class="fa fa-google-plus"></i>
+                <i class="fa fa-twitter"></i>
+                <i class="fa fa-vk"></i>
+                <p>Copyright &copy; Shappy</p>
+            </div>
+        </div>
+    </section>
+
+<form id ="signup" style = "display: none" enctype="multipart/form-data">
+    <h4>Регистрация компании</h4>
+    <input type="text" class="" placeholder="Логин" name="login" required>
+    <input type="password" class="" placeholder="Пароль" name="password" required>
+    <input type="text" class="" placeholder="Название" name="name" required >
+    <input type="email" class="" placeholder="Email" name="email">
+    <input type="text" class="" placeholder="ИНН" >
+    <input type="text" class="" placeholder="ОГРН" >
+    <select class="">
+        <option>Продуктовая</option>
+        <option>Одежда</option>
+        <option>Сантехника</option>
+    </select>
+    <input type="text" class="" placeholder="Регион" >
+    <input type="text" class="" placeholder="Адрес" >
+    <input type="file" name="logo" class="" multiple>
+    <button type="submit" class="button">Зарегистрировать</button>
+    <div id="spinner_register"></div>
+</form>
+
+<script src="../libs/jquery/dist/jquery.js"></script>
+<script src="../libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../libs/fancybox/source/jquery.fancybox.js"></script>
+<script src="../libs/fancybox/source/jquery.fancybox.pack.js"></script>
+<script src="../libs/OwlCarousel/owl-carousel/owl.carousel.min.js"></script>
+<script src="../js/cookie.js"></script>
+<script src="../libs/spinner/spin.js"></script>
+<script src="../js/controllers/auth.js"></script>
+<script src="../js/config.js"></script>
+<script src="../libs/alertify/alertify.js"></script>
+
+</body>
+</html>

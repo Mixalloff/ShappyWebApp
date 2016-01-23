@@ -1,0 +1,96 @@
+doctype html
+html(lang='en', ng-app='app', xmlns:date='http://www.w3.org/1999/xhtml')
+    head
+        meta(charset='UTF-8')
+        title Название компании
+        link(rel='stylesheet', href='../css/company.css')
+        link(rel='stylesheet', href='../libs/jquery-ui/themes/smoothness/jquery-ui.min.css')
+        script(src='../libs/jquery/dist/jquery.min.js')
+        script(src='../libs/jquery-ui/jquery-ui.min.js')
+        link(rel='stylesheet', href='../css/fonts.css')
+        link(rel='stylesheet', href='../css/font-awesome.css')
+        link(rel='stylesheet', href='../libs/bootstrap/dist/css/bootstrap.min.css')
+        link(rel='stylesheet', href='../libs/fancybox/source/jquery.fancybox.css')
+        link(rel='stylesheet', href='../libs/alertify/alertify.min.css')
+    body(ng-controller='Stock',ng-init="stocks= #{JSON.stringify(stocks)}")
+        script.
+            $(function() {
+                $( ".date" ).datepicker();
+            });
+        .container-fluid
+            .row
+                .header
+                    .col-md-6
+                        img#avatar(src='http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080#{company.data.logo}', alt='Brand')
+                        span#company_name #{company.data.name}
+                    .col-md-6
+                        a(href="/logout")#logout.btn.btn-default Выйти
+        .container-fluid
+            .row
+                .col-md-1
+                    .menu
+                        ul
+                            a(href='main.html')
+                                li
+                                    i.fa.fa-home
+                            br
+                            li
+                                i.fa.fa-file
+                            br
+                            li
+                                i.fa.fa-bar-chart
+                .col-md-6
+                    .stats
+                        h4 Статистика
+                        canvas#myChart(width='600', height='200')
+                        canvas#myChart2(width='600', height='200')
+                .col-md-5
+                    .stock_part
+                        .stocks_head
+                            h4 Акции
+                            i.fa(ng-class="{' fa-sort-alpha-desc': isDown('startDate'),\
+              'fa-sort-alpha-asc': isUp('startDate')}")
+                            span(ng-click="sort('startDate')")
+                                | Дата
+                                i.fa(ng-class="{'fa-chevron-down': isDown('startDate'),\
+                'fa-chevron-up': isUp('startDate')}")
+                            input.form-control(type='text', placeholder='Поиск акции...', ng-model='stock_name')
+                        .stocks
+                            .stock(ng-repeat='stock in stocks | filter:{name:stock_name} | orderBy:sortField:reverse ', class='{{stock.id}}', style='background: url(http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}})', data-name='{{stock.name}}', data-description='{{stock.description}}', data-path='{{stock.logo}}', data-startdate='{{stock.startDate}}', data-enddate='{{stock.endDate}}', data-id='{{stock.id}}')
+                                p.stock_header {{stock.name}}
+                                a.edit_btn.fancybox(href='#edit', ng-click='update(stock.id)', title='Быстрое редактирование')
+                                    i.fa.fa-pencil-square-o
+                                a.remove(ng-click='remove(stock.id)', title='Удаление акции')
+                                    i.fa.fa-times
+                                p.stock_descr {{stock.description}}
+                                .date_wrapper
+                                    | {{stock.startDate | date:"dd.MM.yyyy"}} - {{stock.endDate | date:"dd.MM.yyyy"}}
+                        a.down_arrow.fancybox(href='#stock')
+                            i.fa.fa-plus-circle
+        form#stock(ng-submit='add()', name='stock', enctype='multipart/form-data')
+            h4 Создание акции
+            input.form-control(type='text', name='name', placeholder='Заголовок')
+            textarea#description.form-control(name='description', cols='30', rows='7', placeholder='Текст акции')
+            input.form-control(name='logo', type='file')
+            input.form-control.date(name='startDate', type='text', placeholder='Дата начала')
+            input.form-control.date(name='endDate', type='text', placeholder='Дата окончания')
+            button.btn.btn-primary(type='submit') Добавить
+        form#edit
+            h4 Редактирование акции
+            input.form-control(type='text', name='name', placeholder='Заголовок')
+            textarea.form-control(name='description', cols='30', rows='7', placeholder='Текст акции')
+            input.form-control(name='logo', type='file')
+            input.form-control.date(name='startDate', type='text', placeholder='Дата начала')
+            input.form-control.date(name='endDate', type='text', placeholder='Дата окончания')
+            button.btn.btn-primary(type='submit') Сохранить
+        script(src='../libs/Chart.js/Chart.js')
+        script(src='../libs/bootstrap/dist/js/bootstrap.min.js')
+        script(src='../libs/fancybox/source/jquery.fancybox.js')
+        script(src='../libs/fancybox/source/jquery.fancybox.pack.js')
+        script(src='../libs/angular/angular.min.js')
+        script(src='../js/cookie.js')
+        script(src='../js/config.js')
+        script(src='../js/controllers/company.js')
+        script(src='../libs/alertify/alertify.js')
+        script(src='../js/charts.js')
+        script(src='../js/Error.js')

@@ -1,0 +1,19 @@
+{
+  "name": "backend-stock",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Nek <matrosov.nikita94@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ]
+}

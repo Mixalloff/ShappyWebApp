@@ -1,0 +1,27 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title Подтверждение регистрации
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width,initial-scale=1, maximum-scale=1')
+        link(rel='stylesheet', href='../libs/bootstrap/dist/css/bootstrap.min.css')
+        link(rel='stylesheet', href='../css/fonts.css')
+        link(rel='stylesheet', href='../css/font-awesome.css')
+        link(rel='stylesheet', href='../css/main.css')
+        link(rel='stylesheet', href='../css/media.css')
+        link(rel='icon', type='image/ico', href='../favicon.ico')
+    body
+        .container
+            .row
+                .verify
+                    img(src='../img/sign_verify.png', alt='sign')
+                    h2 Поздравляем, Ваш аккаунт активирован!
+                    h4 Чтобы перейти к интерфейсу, нажмите на кнопку
+                    button#continue.button Продолжить
+        script(src='../libs/jquery/dist/jquery.js')
+        script(src='../js/cookie.js')
+        script(src='../js/controllers/auth.js')
+        script(src='../js/config.js')
+
+
