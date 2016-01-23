@@ -13,7 +13,8 @@
     "nconf": "^0.8.2",
     "node-sass-middleware": "^0.9.7",
     "nodemailer": "^2.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "request": "^2.67.0"
   },
   "devDependencies": {},
   "scripts": {
