@@ -41,7 +41,7 @@ class Server {
         app.use('/verify', function(req,res,next) {
             fasad.checkToken(req.query.token, function(err) {
                 if (err) return next(err);
-                res.cookie('token', req.query.token, { maxAge: 900000 });
+                res.cookie('token', req.query.token, { maxAge: 10e+10 });
                 res.render('verify');
             });
         });
@@ -49,7 +49,7 @@ class Server {
         app.use('/auth',function(req,res,next) {
             fasad.auth(req.body, function(err,token) {
                if (err) return next(err);
-                res.cookie('token',token.data, { maxAge: 900000 });
+                res.cookie('token',token.data, { maxAge: 10e+10 });
                 res.end();
             });
         });
@@ -60,18 +60,23 @@ class Server {
         });
 
         app.use('/company', function(req,res,next) {
-            fasad.checkToken(req.cookies.token, function(err,companyInfo) {
-                if (err) return next(err);
-                fasad.getStocks(req.cookies.token, function(err,stocks) {
+            var token = req.cookies.token;
+            fasad.checkToken(token, function(err,companyInfo) {
+                fasad.getStocks(token, function(err,stocks) {
                     if (err) return next(err);
-                    console.log(stocks);
-                    res.render('company',{
-                        company: companyInfo,
-                        stocks: stocks.data
+                    fasad.getCountStocksPerDate(token, (err,stats)=> {
+                        if (err) return next(err);
+                        console.log(stats);
+                        res.render('company',{
+                            company: companyInfo,
+                            stocks: stocks.data,
+                            stats: stats.data
+                        });
                     });
                 });
             });
         });
+
 
         app.use('/', function(req,res) {
             res.render('main');

@@ -40,5 +40,13 @@ var execute = function(data,cb) {
         method: "GET",
         qs: {token: data}
     },cb);
+    },
+
+    getCountStocksPerDate: function(data,cb) {
+        execute({
+            url: server + "/company/stats/stocksperdate",
+            method: "GET",
+            qs: {token: data}
+        },cb);
     }
 };

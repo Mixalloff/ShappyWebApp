@@ -92,5 +92,7 @@ html(lang='en', ng-app='app', xmlns:date='http://www.w3.org/1999/xhtml')
         script(src='../js/config.js')
         script(src='../js/controllers/company.js')
         script(src='../libs/alertify/alertify.js')
-        script(src='../js/charts.js')
         script(src='../js/Error.js')
+        script.
+            var statistics =!{JSON.stringify(stats)}
+        script(src='../js/charts.js')
