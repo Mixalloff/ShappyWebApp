@@ -22,7 +22,7 @@ $(".menu li").hover(
 
 $(".fancybox").fancybox();
 
-app.controller('Stock', function($scope) {
+app.controller('Stock', function($scope, $location) {
 
     //добавление акции
     $scope.add = function() {
@@ -141,7 +141,9 @@ app.controller('Stock', function($scope) {
             });
         }
     };
-
+    $scope.go = function ( path,param ) {
+        window.location.href=path + param;
+    };
     //сортировка акции по дате
     $scope.sortField = 'startDate';
     $scope.reverse  = true;

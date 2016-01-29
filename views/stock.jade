@@ -1,0 +1,29 @@
+doctype html
+html(lang='en', xmlns:date='http://www.w3.org/1999/xhtml')
+    head
+        meta(charset='UTF-8')
+        title Акция
+        link(rel='stylesheet', href='../css/company.css')
+        link(rel='stylesheet', href='../libs/jquery-ui/themes/smoothness/jquery-ui.min.css')
+        script(src='../libs/jquery/dist/jquery.min.js')
+        script(src='../libs/jquery-ui/jquery-ui.min.js')
+        link(rel='stylesheet', href='../css/fonts.css')
+        link(rel='stylesheet', href='../css/font-awesome.css')
+        link(rel='stylesheet', href='../libs/bootstrap/dist/css/bootstrap.min.css')
+        link(rel='stylesheet', href='../libs/fancybox/source/jquery.fancybox.css')
+        link(rel='stylesheet', href='../libs/alertify/alertify.min.css')
+    body
+        canvas#myChart2(width='600', height='200')
+        script(src='../libs/Chart.js/Chart.js')
+        script(src='../libs/bootstrap/dist/js/bootstrap.min.js')
+        script(src='../libs/fancybox/source/jquery.fancybox.js')
+        script(src='../libs/fancybox/source/jquery.fancybox.pack.js')
+        script(src='../libs/angular/angular.min.js')
+        script(src='../js/config.js')
+        script(src='../js/controllers/company.js')
+        script(src='../libs/alertify/alertify.js')
+        script(src='../js/Error.js')
+        script(src="../js/Stats.js")
+        script.
+            var statistics = !{JSON.stringify(stats)}
+        script(src='../js/charts.js')

@@ -66,17 +66,30 @@ class Server {
                     if (err) return next(err);
                     fasad.getCountStocksPerDate(token, (err,stats)=> {
                         if (err) return next(err);
-                        console.log(stats);
-                        res.render('company',{
-                            company: companyInfo,
-                            stocks: stocks.data,
-                            stats: stats.data
+                        fasad.getNumberOfSubsribitions(token, function(err,users) {
+                            res.render('company',{
+                                company: companyInfo,
+                                stocks: stocks.data,
+                                stats: stats,
+                                users: users
+                            });
                         });
+
                     });
                 });
             });
         });
 
+        app.use('/stockinfo/:id', function(req,res,next) {
+            var data = {id: req.params.id,
+                        token: req.cookies.token};
+            fasad.getStatsForStock(data, (err,stats)=> {
+                console.log(stats);
+               res.render('stock', {
+                   stats: stats
+               });
+            });
+        });
 
         app.use('/', function(req,res) {
             res.render('main');

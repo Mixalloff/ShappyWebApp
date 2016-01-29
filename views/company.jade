@@ -42,8 +42,7 @@ html(lang='en', ng-app='app', xmlns:date='http://www.w3.org/1999/xhtml')
                 .col-md-6
                     .stats
                         h4 Статистика
-                        canvas#myChart(width='600', height='200')
-                        canvas#myChart2(width='600', height='200')
+                        #charts
                 .col-md-5
                     .stock_part
                         .stocks_head
@@ -56,7 +55,8 @@ html(lang='en', ng-app='app', xmlns:date='http://www.w3.org/1999/xhtml')
                 'fa-chevron-up': isUp('startDate')}")
                             input.form-control(type='text', placeholder='Поиск акции...', ng-model='stock_name')
                         .stocks
-                            .stock(ng-repeat='stock in stocks | filter:{name:stock_name} | orderBy:sortField:reverse ', class='{{stock.id}}', style='background: url(http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}})', data-name='{{stock.name}}', data-description='{{stock.description}}', data-path='{{stock.logo}}', data-startdate='{{stock.startDate}}', data-enddate='{{stock.endDate}}', data-id='{{stock.id}}')
+                            .stock(ng-repeat='stock in stocks | filter:{name:stock_name} | orderBy:sortField:reverse ', class='{{stock.id}}', style='background: url(http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}})', data-name='{{stock.name}}', data-description='{{stock.description}}', data-path='{{stock.logo}}', data-startdate='{{stock.startDate}}', data-enddate='{{stock.endDate}}', data-id='{{stock.id}}',
+                             ng-click='go("/stockinfo/",stock.id)')
                                 p.stock_header {{stock.name}}
                                 a.edit_btn.fancybox(href='#edit', ng-click='update(stock.id)', title='Быстрое редактирование')
                                     i.fa.fa-pencil-square-o
@@ -93,6 +93,9 @@ html(lang='en', ng-app='app', xmlns:date='http://www.w3.org/1999/xhtml')
         script(src='../js/controllers/company.js')
         script(src='../libs/alertify/alertify.js')
         script(src='../js/Error.js')
+        script(src='../js/Visualizer.js')
+        script(src="../js/Stats.js")
         script.
             var statistics =!{JSON.stringify(stats)}
+            var users =!{JSON.stringify(users)}
         script(src='../js/charts.js')

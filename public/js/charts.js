@@ -1,28 +1,14 @@
-var ctx = $("#myChart").get(0).getContext("2d");
-
-var daysPerMonth = [31,29,31,30,31,30,31,31,30,31,30,31];
-var days = [];
-var data = [];
-for(var i = 1; i <= daysPerMonth[new Date().getMonth()]; i++) {
-    days.push(i);
-    data.push(0);
-}
-for(var item in statistics) {
-    data[new Date(item).getDate()-1] = statistics[item];
-}
-var riceData = {
-    labels: days,
-    datasets: [
-        {
-            fillColor: "rgba(172,194,132,0.4)",
-            strokeColor: "#ACC26D",
-            pointColor: "#fff",
-            pointStrokeColor: "#9DB86D",
-            data: data
-        }
-    ]
-};
-
-
-var rice = document.getElementById('myChart2').getContext('2d');
-new Chart(rice).Line(riceData);
+var stats = Stats.getByType(statistics);
+var test_users = {
+    type:'countperstock'
+, data: {
+    'Акция1':10,
+    'Акция2':20,
+    'Акция3':6,
+    'Акция4': 13
+}};
+var pie_users = Stats.getByType(test_users);
+var GraphicF = Visualizer.getByType(statistics.type);
+var GraphicS = Visualizer.getByType(users.type);
+new GraphicF(stats).createCanvas(600,200).appendTo('charts');
+new GraphicS(pie_users).createCanvas(600,200).appendTo('charts');
