@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "engines": {
+    "node": ">= 5.0.0",
+    "npm": ">= 3.3.12"
+  },
   "dependencies": {
     "body-parser": "^1.14.2",
     "bower": "^1.7.2",
