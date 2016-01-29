@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node ./app.js"
   },
   "engines": {
     "node": ">= 5.0.0",
@@ -24,9 +24,6 @@
     "request": "^2.67.0"
   },
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "",
   "license": "ISC"
 }
