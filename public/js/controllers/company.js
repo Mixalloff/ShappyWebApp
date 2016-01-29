@@ -22,7 +22,7 @@ $(".menu li").hover(
 
 $(".fancybox").fancybox();
 
-app.controller('Stock', function($scope, $location) {
+app.controller('Company', function($scope, $location) {
 
     //добавление акции
     $scope.add = function() {
@@ -36,7 +36,6 @@ app.controller('Stock', function($scope, $location) {
             contentType: false,
             processData: false,
             success: function (resultJSON) {
-                console.log(resultJSON);
                 if (resultJSON.type == 'stock')
                 {
                     var new_obj = new Object();

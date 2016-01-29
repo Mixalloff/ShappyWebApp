@@ -2,7 +2,7 @@ doctype html
 html(lang='en', ng-app='app', xmlns:date='http://www.w3.org/1999/xhtml')
     head
         meta(charset='UTF-8')
-        title Название компании
+        title #{company.data.name}
         link(rel='stylesheet', href='../css/company.css')
         link(rel='stylesheet', href='../libs/jquery-ui/themes/smoothness/jquery-ui.min.css')
         script(src='../libs/jquery/dist/jquery.min.js')
@@ -12,7 +12,7 @@ html(lang='en', ng-app='app', xmlns:date='http://www.w3.org/1999/xhtml')
         link(rel='stylesheet', href='../libs/bootstrap/dist/css/bootstrap.min.css')
         link(rel='stylesheet', href='../libs/fancybox/source/jquery.fancybox.css')
         link(rel='stylesheet', href='../libs/alertify/alertify.min.css')
-    body(ng-controller='Stock',ng-init="stocks= #{JSON.stringify(stocks)}")
+    body(ng-controller='Company',ng-init="stocks= #{JSON.stringify(stocks)}")
         script.
             $(function() {
                 $( ".date" ).datepicker();

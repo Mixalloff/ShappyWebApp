@@ -1,22 +1,28 @@
-$('#target-editor-twitter').markdown({
-    hiddenButtons:'cmdPreview',
-    footer:'<div id="twitter-footer" class="well" style="display:none;"></div>' +
-    '<small id="twitter-counter" class="text-success">140 character left</small>',
-    onChange:function(e){
+'use strict';
 
-        var content = e.parseContent(),
-            content_length = (content.match(/\n/g)||[]).length + content.length
+var app = angular.module('app',[]);
 
-        if (content == '') {
-            $('#twitter-footer').hide()
-        } else {
-            $('#twitter-footer').show().html(content)
-        }
+app.controller('Stock', function($scope,$http) {
 
-        if (content_length > 140) {
-            $('#twitter-counter').removeClass('text-success').addClass('text-danger').html(content_length-140+' character surplus.')
-        } else {
-            $('#twitter-counter').removeClass('text-danger').addClass('text-success').html(140-content_length+' character left.')
-        }
+    $scope.editStock = function() {
+
+        var form = $("#edit_stock");
+        var formData = new FormData(form[0]);
+        formData.append("token",getCookie("token"));
+        $.ajax({
+            url: Config.editStock,
+            type: "post",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false
+        }).success(function (image) {
+            alertify.notify("Акция успешно обновлена","success");
+            $scope.stock.logo = image.data;
+            $scope.$apply();
+        }).error(function (data) {
+
+        })
     }
 });
+

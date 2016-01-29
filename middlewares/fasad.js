@@ -3,7 +3,6 @@ var request = require('request');
 var server = "http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080";
 
 var execute = function(data,cb) {
-    console.log(data);
     request(data,function(error,response, body) {
         body = JSON.parse(body);
         if (response.statusCode!=200) {
@@ -63,6 +62,14 @@ var execute = function(data,cb) {
             url: server + "/company/stats/countperstock",
             method: "GET",
             qs: {token: data}
+        },cb);
+    },
+
+    getStockInfo: function(data,cb) {
+        execute({
+            url: server + "/company/stocks/info",
+            method: "GET",
+            qs: {id: data.id, token: data.token}
         },cb);
     }
 };

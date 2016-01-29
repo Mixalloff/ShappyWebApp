@@ -83,11 +83,15 @@ class Server {
         app.use('/stockinfo/:id', function(req,res,next) {
             var data = {id: req.params.id,
                         token: req.cookies.token};
-            fasad.getStatsForStock(data, (err,stats)=> {
-                console.log(stats);
-               res.render('stock', {
-                   stats: stats
-               });
+            fasad.getStockInfo(data,(err,stockInfo)=> {
+                if (err) return next(err);
+                fasad.getStatsForStock(data, (err,stats)=> {
+                    console.log(stockInfo);
+                    res.render('stock', {
+                        stock: stockInfo.data,
+                        stats: stats
+                    });
+                });
             });
         });
 
