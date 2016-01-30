@@ -30,8 +30,13 @@ class AbstractChart {
         this.stats = stats;
     }
 
-    createCanvas(width,height) {
+    createCanvas(width,height,header) {
         this.canvas = document.createElement('canvas');
+        this.table = document.createElement('div');
+        this.header = document.createElement('h5');
+        this.header.innerHTML = header;
+        this.table.className = 'list-group';
+        this.table.style.display = 'inline-block';
         this.canvas.width = width;
         this.canvas.height = height;
         return this;
@@ -41,7 +46,10 @@ class AbstractChart {
     }
 
     appendTo(id) {
-        document.getElementById(id).appendChild(this.canvas);
+        var parent = document.getElementById(id);
+        parent.appendChild(this.header);
+        parent.appendChild(this.canvas);
+        parent.appendChild(this.table);
         this.fillCanvas();
     }
 }
@@ -70,19 +78,34 @@ class LineChart extends AbstractChart {
 }
 class PieChart extends  AbstractChart {
 
-    static get colors() {
-        return ["#F7464A","#46BFBD","#FDB45C"];
-    };
+    static GetRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
 
     generateData() {
-        var counter = 0;
         this.data=[];
         for (var item in this.stats.data) {
+            var button = document.createElement('button');
+            button.className='list-group-item';
+            button.innerHTML = item;
+            this.table.appendChild(button);
+            var color = PieChart.GetRandomColor();
+            var label = document.createElement('div');
+            label.style.width = '10px';
+            label.style.height = '10px';
+            label.style.backgroundColor = color;
+            label.style.display = 'inline-block';
+            label.style.marginLeft = '10px';
+            button.appendChild(label);
             this.data.push(
             {
                 value: this.stats.data[item],
-                color:PieChart.colors[counter++],
-                highlight: "#FF5A5E",
+                color:color,
                 label: item
             }
         )

@@ -20,8 +20,6 @@ $(".menu li").hover(
 );
 
 
-$(".fancybox").fancybox();
-
 app.controller('Company', function($scope, $location) {
 
     //добавление акции
@@ -59,10 +57,9 @@ app.controller('Company', function($scope, $location) {
             }
         });
     };
-
+    $(".fancybox").fancybox();
     //обновление акции
     $scope.update = function(stock_id) {
-
         var stockForm = document.getElementsByClassName(stock_id)[0];
         var formEdit = document.getElementById("edit");
         [].forEach.call(formEdit.childNodes,function(element){

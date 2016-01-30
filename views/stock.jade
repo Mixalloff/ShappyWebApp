@@ -33,16 +33,12 @@ html(lang='en', ng-app='app', xmlns:date='http://www.w3.org/1999/xhtml')
                             img(src="http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}", alt="logo")
                         a.fancybox(href="http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}") Посмотреть текущее изображение в полном размере
                         input.form-control(type="file", name="logo")
-                        input.form-control.date(name="startDate",value='{{stock.startDate | date:"dd.MM.yyyy"}}')
-                        input.form-control.date(name="endDate", value='{{stock.endDate | date:"dd.MM.yyyy"}}')
+                        input.form-control.date(name="endDate", value='{{stock.endDate | date:"MM/dd/yyyy"}}')
                         input(type="hidden", value="{{stock.id}}", name="id")
                         .button_wrapper
                             button.btn.btn-success.form-control(type="submit", ng-click="editStock()") Сохранить
                 #graphics.tab-pane.fade
                     #charts
-
-
-
         script(src='../libs/Chart.js/Chart.js')
         script(src='../libs/bootstrap/dist/js/bootstrap.min.js')
         script(src='../libs/fancybox/source/jquery.fancybox.js')
@@ -60,6 +56,5 @@ html(lang='en', ng-app='app', xmlns:date='http://www.w3.org/1999/xhtml')
             $("#graphics").css("display", "block");
             var statist = Stats.getByType(statistics);
             var Graphic = Visualizer.getByType(statistics.type);
-            new Graphic(statist).createCanvas(600,200).appendTo('charts');
-            //$("#graphics").css("display", "none");
+            new Graphic(statist).createCanvas(600,200,"Количество добавлений этой акции пользователями по дням").appendTo('charts');
 

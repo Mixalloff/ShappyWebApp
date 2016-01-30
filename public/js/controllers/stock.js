@@ -2,6 +2,7 @@
 
 var app = angular.module('app',[]);
 
+$(".fancybox").fancybox();
 app.controller('Stock', function($scope,$http) {
 
     $scope.editStock = function() {
