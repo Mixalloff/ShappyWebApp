@@ -39,11 +39,11 @@ html(lang='en', ng-app='app', xmlns:date='http://www.w3.org/1999/xhtml')
                             br
                             li
                                 i.fa.fa-bar-chart
-                .col-md-6
+                .col-md-7
                     .stats
                         h4 Статистика
                         #charts
-                .col-md-5
+                .col-md-4
                     .stock_part
                         .stocks_head
                             h4 Акции
@@ -99,15 +99,16 @@ html(lang='en', ng-app='app', xmlns:date='http://www.w3.org/1999/xhtml')
             var stats_data =!{JSON.stringify(stats)}
             var users_data =!{JSON.stringify(users)}
 
-            users_data =
-            {
-                type: 'countperstock',
-                data: {
-                    'Акция 1':3,
-                    'Акция 2':4,
-                    'Акция 3':2
-                }
-            }
+            //            users_data =
+            //            {
+            //                type: 'countperstock',
+            //                data: {
+            //                    'Акция 1':3,
+            //                    'Акция 2':4,
+            //                    'Акция 3':2
+            //                }
+            //            }
+
             var stats_obj = Stats.getByType(stats_data);
             var users_obj = Stats.getByType(users_data);
 

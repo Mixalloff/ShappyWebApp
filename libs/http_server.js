@@ -46,6 +46,7 @@ class Server {
             });
         });
 
+
         app.use('/auth',function(req,res,next) {
             fasad.auth(req.body, function(err,token) {
                if (err) return next(err);
