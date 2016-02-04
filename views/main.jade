@@ -1,40 +1,31 @@
-doctype html
-html(lang='en')
-    head
-        meta(charset='UTF-8')
-        title Главная
-        meta(http-equiv='X-UA-Compatible', content='IE=edge')
-        meta(name='viewport', content='width=device-width,initial-scale=1, maximum-scale=1')
-        link(rel='stylesheet', href='../libs/bootstrap/dist/css/bootstrap.min.css')
-        link(rel='stylesheet', href='../libs/fancybox/source/jquery.fancybox.css')
-        link(rel='stylesheet', href='../css/fonts.css')
-        link(rel='stylesheet', href='../css/main.css')
-        link(rel='stylesheet', href='../css/font-awesome.css')
-        link(rel='stylesheet', href='../libs/alertify/alertify.min.css')
-        link(rel='stylesheet', href='../libs/OwlCarousel/owl-carousel/owl.carousel.css')
-        link(rel='stylesheet', href='../libs/OwlCarousel/owl-carousel/owl.theme.css')
-        link(rel='stylesheet', href='../css/media.css')
-        link(rel='icon', type='image/ico', href='../favicon.ico')
-        style.
-            #page-preloader {
-                position: fixed;
-                left: 0;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                background: #000;
-                z-index: 100500;
-            }
-            #page-preloader .spinner {
-                width: 32px;
-                height: 32px;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                background: url('../img/spinner.gif') no-repeat 50% 50%;
-                margin: -16px 0 0 -16px;
-            }
-    body#body
+extends  _layout
+block additional_styles
+    title Главная
+    link(rel='stylesheet', href='../libs/fancybox/source/jquery.fancybox.css')
+    link(rel='stylesheet', href='../css/main.css')
+    link(rel='stylesheet', href='../libs/OwlCarousel/owl-carousel/owl.carousel.css')
+    link(rel='stylesheet', href='../libs/OwlCarousel/owl-carousel/owl.theme.css')
+    style.
+        #page-preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: #000;
+            z-index: 100500;
+        }
+        #page-preloader .spinner {
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            background: url('../img/spinner.gif') no-repeat 50% 50%;
+            margin: -16px 0 0 -16px;
+        }
+block content
+    div#body
         #page-preloader
             span.spinner
         .container-fluid
@@ -321,23 +312,19 @@ html(lang='en')
             input(type='email', placeholder='Email', name='email')
             input(type='text', placeholder='ИНН')
             input(type='text', placeholder='ОГРН')
-            select
-                option Продуктовая
-                option Одежда
-                option Сантехника
+            div#categories
             input(type='text', placeholder='Регион')
             input(type='text', placeholder='Адрес')
             input(type='file', name='logo', multiple='')
             button.button(type='submit') Зарегистрировать
             #spinner_register
-        script(src='../libs/jquery/dist/jquery.js')
-        script(src='../libs/bootstrap/dist/js/bootstrap.min.js')
-        script(src='../libs/fancybox/source/jquery.fancybox.js')
-        script(src='../libs/fancybox/source/jquery.fancybox.pack.js')
-        script(src='../libs/OwlCarousel/owl-carousel/owl.carousel.min.js')
-        script(src='../js/cookie.js')
-        script(src='../libs/spinner/spin.js')
-        script(src='../js/controllers/auth.js')
-        script(src='../js/config.js')
-        script(src='../js/Error.js')
-        script(src='../libs/alertify/alertify.js')
+block additional_scripts
+    script(src='../libs/fancybox/source/jquery.fancybox.js')
+    script(src='../libs/fancybox/source/jquery.fancybox.pack.js')
+    script(src='../libs/OwlCarousel/owl-carousel/owl.carousel.min.js')
+    script(src='../libs/spinner/spin.js')
+    script(src='../js/controllers/auth.js')
+    script(src='../js/Error.js')
+    script.
+        var all_categories =!{JSON.stringify(categories)}
+

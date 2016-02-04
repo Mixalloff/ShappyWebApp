@@ -1,0 +1,14 @@
+extends  _layout
+block additional_styles
+        title Подтверждение регистрации
+        link(rel='stylesheet', href='../css/main.css')
+block content
+        .container
+            .row
+                .verify
+                    img(src='../img/emailerror.jpg', alt='sign')
+                    h2 К сожалению, Вы не активировали свой аккаунт!
+                    h4 Чтобы отправить повторно письмо для активации, нажмите на кнопку
+                    button.button Отправить повторно
+block additional_scripts
+    script(src='../js/controllers/auth.js')

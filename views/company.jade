@@ -1,18 +1,13 @@
-doctype html
-html(lang='en', ng-app='app', xmlns:date='http://www.w3.org/1999/xhtml')
-    head
-        meta(charset='UTF-8')
-        title #{company.data.name}
-        link(rel='stylesheet', href='../css/company.css')
-        link(rel='stylesheet', href='../libs/jquery-ui/themes/smoothness/jquery-ui.min.css')
-        script(src='../libs/jquery/dist/jquery.min.js')
-        script(src='../libs/jquery-ui/jquery-ui.min.js')
-        link(rel='stylesheet', href='../css/fonts.css')
-        link(rel='stylesheet', href='../css/font-awesome.css')
-        link(rel='stylesheet', href='../libs/bootstrap/dist/css/bootstrap.min.css')
-        link(rel='stylesheet', href='../libs/fancybox/source/jquery.fancybox.css')
-        link(rel='stylesheet', href='../libs/alertify/alertify.min.css')
-    body(ng-controller='Company',ng-init="stocks= #{JSON.stringify(stocks)}")
+extends _layout
+block additional_styles
+    title #{company.data.name}
+    link(rel='stylesheet', href='../css/company.css')
+    link(rel='stylesheet', href='../libs/jquery-ui/themes/smoothness/jquery-ui.min.css')
+    script(src='../libs/jquery/dist/jquery.min.js')
+    script(src='../libs/jquery-ui/jquery-ui.min.js')
+    link(rel='stylesheet', href='../libs/fancybox/source/jquery.fancybox.css')
+block content
+    div(ng-controller='Company',ng-init="stocks= #{JSON.stringify(stocks)}")
         script.
             $(function() {
                 $( ".date" ).datepicker();
@@ -83,38 +78,25 @@ html(lang='en', ng-app='app', xmlns:date='http://www.w3.org/1999/xhtml')
             input.form-control.date(name='startDate', type='text', placeholder='Дата начала')
             input.form-control.date(name='endDate', type='text', placeholder='Дата окончания')
             button.btn.btn-primary(type='submit') Сохранить
-        script(src='../libs/Chart.js/Chart.js')
-        script(src='../libs/bootstrap/dist/js/bootstrap.min.js')
-        script(src='../libs/fancybox/source/jquery.fancybox.js')
-        script(src='../libs/fancybox/source/jquery.fancybox.pack.js')
-        script(src='../libs/angular/angular.min.js')
-        script(src='../js/cookie.js')
-        script(src='../js/config.js')
-        script(src='../js/controllers/company.js')
-        script(src='../libs/alertify/alertify.js')
-        script(src='../js/Error.js')
-        script(src='../js/Visualizer.js')
-        script(src="../js/Stats.js")
-        script.
-            var stats_data =!{JSON.stringify(stats)}
-            var users_data =!{JSON.stringify(users)}
+block additional_scripts
+    script(src='../libs/Chart.js/Chart.js')
+    script(src='../libs/fancybox/source/jquery.fancybox.js')
+    script(src='../libs/fancybox/source/jquery.fancybox.pack.js')
+    script(src='../js/controllers/company.js')
+    script(src='../libs/angular/angular.min.js')
+    script(src='../js/Error.js')
+    script(src='../js/Visualizer.js')
+    script(src="../js/Stats.js")
+    script.
+        var stats_data =!{JSON.stringify(stats)}
+        var users_data =!{JSON.stringify(users)}
 
-            //            users_data =
-            //            {
-            //                type: 'countperstock',
-            //                data: {
-            //                    'Акция 1':3,
-            //                    'Акция 2':4,
-            //                    'Акция 3':2
-            //                }
-            //            }
+        var stats_obj = Stats.getByType(stats_data);
+        var users_obj = Stats.getByType(users_data);
 
-            var stats_obj = Stats.getByType(stats_data);
-            var users_obj = Stats.getByType(users_data);
+        var GraphicF = Visualizer.getByType(stats_data.type);
+        var GraphicS = Visualizer.getByType(users_data.type);
 
-            var GraphicF = Visualizer.getByType(stats_data.type);
-            var GraphicS = Visualizer.getByType(users_data.type);
+        new GraphicF(stats_obj).createCanvas(600, 200, 'Общее количество добавленных пользователями акций').appendTo('charts');
 
-            new GraphicF(stats_obj).createCanvas(600, 200, 'Общее количество добавленных пользователями акций').appendTo('charts');
-
-            new GraphicS(users_obj).createCanvas(300, 200, 'Количество пользователей по каждой акции').appendTo('charts');
+        new GraphicS(users_obj).createCanvas(300, 200, 'Количество пользователей по каждой акции').appendTo('charts');

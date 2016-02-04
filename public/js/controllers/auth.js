@@ -9,7 +9,35 @@ $(document).ready(function () {
     var formRegister = $("#signup");
     var formLogin = $("#signin");
     var spinner = Config.spinner;
+    var tree = document.createElement("select");
+    var default_option = document.createElement("option");
+    default_option.setAttribute("selected","selected");
+    default_option.style.display = "none";
+    default_option.text = "Выберите категорию";
+    tree.appendChild(default_option);
+    var foo = function(array,parent)
+    {
+        for(var i = 0; i < array.length; i++)
+        {
+            if (array[i].children.length>0)
+            {
+                var optgroup = document.createElement("optgroup");
+                optgroup.setAttribute("label",array[i].name);
+                parent.appendChild(optgroup);
+                foo(array[i].children,optgroup);
+            }
+            else
+            {
+                var option = document.createElement("option");
+                option.text = array[i].name;
+                option.value = array[i].id;
+                parent.appendChild(option);
+            }
 
+        }
+        return parent;
+    };
+   document.getElementById("categories").appendChild(foo(all_categories,tree));
     //регистрация компании
     formRegister.submit(function (e) {
         spinner.start("spinner_register");
@@ -57,7 +85,7 @@ $(document).ready(function () {
 
     //показ pop-up форм
     $(".fancybox").fancybox({
-       scrolling: 'no',
+        scrolling: 'no',
         helpers:
         {
             overlay:
@@ -95,10 +123,10 @@ $(document).ready(function () {
     var owl = carousel.data('owlCarousel');
 
     $("#next").click(function() {
-           owl.next();
+        owl.next();
     });
     $("#prev").click(function() {
-           owl.prev();
+        owl.prev();
     });
 
     $(".points ul li").click(function() {

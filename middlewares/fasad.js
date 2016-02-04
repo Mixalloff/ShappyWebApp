@@ -71,5 +71,12 @@ var execute = function(data,cb) {
             method: "GET",
             qs: {id: data.id, token: data.token}
         },cb);
+    },
+
+    getCategories: function(cb) {
+        execute({
+            url: server + "/company/categories/all",
+            method: "GET"
+        },cb);
     }
 };

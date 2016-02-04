@@ -67,6 +67,7 @@ class Server {
                     if (err) return next(err);
                     fasad.getCountStocksPerDate(token, (err,stats)=> {
                         if (err) return next(err);
+                        console.log(stats);
                         fasad.getNumberOfSubsribitions(token, function(err,users) {
                             res.render('company',{
                                 company: companyInfo,
@@ -75,7 +76,6 @@ class Server {
                                 users: users
                             });
                         });
-
                     });
                 });
             });
@@ -97,7 +97,13 @@ class Server {
         });
 
         app.use('/', function(req,res) {
-            res.render('main');
+            fasad.getCategories((err,categories)=> {
+                if (err) return next(err);
+                res.render('main', {
+                    categories: categories.data
+                });
+            });
+
         });
 
 
