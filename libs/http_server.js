@@ -49,7 +49,7 @@ class Server {
 
         app.use('/auth',function(req,res,next) {
             fasad.auth(req.body, function(err,token) {
-               if (err) return next(err);
+               if (err) return next(HttpError.ConvertError(err));
                 res.cookie('token',token.data, { maxAge: 10e+10 });
                 res.end();
             });
@@ -106,6 +106,12 @@ class Server {
             });
         });
 
+        app.get('/resend/:id', function(req,res) {
+            res.render('resend',{
+                id: req.params.id
+            })
+        });
+
         app.use('/', function(req,res) {
             fasad.getCategories((err,categories)=> {
                 if (err) return next(err);
@@ -119,6 +125,7 @@ class Server {
 
 
         app.use(function(err,req,res,next) {
+            console.log("error");
             if (typeof err == "number")
             {
                 err = new HttpError(err);

@@ -13,13 +13,14 @@ class Error {
     show() {
         switch(this.type) {
             case 'register': this.notify(); break;
-            case 'type2': this.redirect(); break;
+            case 'unactivated': this.redirect('/resend/'+this.message); break;
             default: this.notify();
         }
     };
 
     constructor(message,type) {
         this.message = message;
+        alert(this.message);
         this.type = type;
     }
 

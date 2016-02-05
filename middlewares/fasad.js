@@ -6,7 +6,8 @@ var execute = function(data,cb) {
     request(data,function(error,response, body) {
         body = JSON.parse(body);
         if (response.statusCode!=200) {
-             cb(body);
+            body.status = response.statusCode;
+            cb(body);
         }
         else {
              cb(null,body);
@@ -77,6 +78,6 @@ var execute = function(data,cb) {
         execute({
             url: server + "/company/categories/all",
             method: "GET"
-        },cb);
+        }, cb);
     }
 };

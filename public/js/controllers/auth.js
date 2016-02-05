@@ -31,6 +31,7 @@ $(document).ready(function () {
                 }
             },
             error: function (response) {
+
                 spinner.stop();
                 new Error(response.responseJSON.data,response.responseJSON.type).show();
             }
@@ -51,9 +52,24 @@ $(document).ready(function () {
             },
             error: function (response) {
                 spinner.stop();
-                new Error(response.responseJSON.data,response.responseJSON.type).show();
+                new Error(response.responseJSON.message,response.responseJSON.type).show();
             }
         });
+    });
+
+    $("#resend").click(function() {
+        $.ajax({
+            url: server + "/company/resend",
+            type: "post",
+            data: {id: company_id},
+            success: function() {
+                alertify.notify(Config.mesSuccessResend,'success');
+                window.location.href='/';
+            },
+            error: function(response) {
+                new Error(response.responseJSON.data,response.responseJSON.type).show();
+            }
+        })
     });
 
     //показ pop-up форм

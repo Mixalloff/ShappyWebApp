@@ -43,6 +43,7 @@ var Config = {
   mesWrongRemoveStock: "Не удалось удалить акцию",
   mesSuccessRemoveStock: "Акция успешно удалена",
   mesSuccessActivationEmail: "Пожалуйста, подведите регистрацию по email",
+  mesSuccessResend: "Письмо отправлено на ваш email",
 
 
   //пункты меню
