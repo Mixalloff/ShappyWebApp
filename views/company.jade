@@ -8,10 +8,6 @@ block additional_styles
     link(rel='stylesheet', href='../libs/fancybox/source/jquery.fancybox.css')
 block content
     div(ng-controller='Company',ng-init="stocks= #{JSON.stringify(stocks)}")
-        script.
-            $(function() {
-                $( ".date" ).datepicker();
-            });
         .container-fluid
             .row
                 .header
@@ -67,6 +63,7 @@ block content
             input.form-control(type='text', name='name', placeholder='Заголовок')
             textarea#description.form-control(name='description', cols='30', rows='7', placeholder='Текст акции')
             input.form-control(name='logo', type='file')
+            include  includes/categories
             input.form-control.date(name='startDate', type='text', placeholder='Дата начала')
             input.form-control.date(name='endDate', type='text', placeholder='Дата окончания')
             button.btn.btn-primary(type='submit') Добавить
@@ -75,22 +72,24 @@ block content
             input.form-control(type='text', name='name', placeholder='Заголовок')
             textarea.form-control(name='description', cols='30', rows='7', placeholder='Текст акции')
             input.form-control(name='logo', type='file')
+            include  includes/categories
             input.form-control.date(name='startDate', type='text', placeholder='Дата начала')
             input.form-control.date(name='endDate', type='text', placeholder='Дата окончания')
             button.btn.btn-primary(type='submit') Сохранить
 block additional_scripts
+    script(src='../libs/angular/angular.min.js')
     script(src='../libs/Chart.js/Chart.js')
     script(src='../libs/fancybox/source/jquery.fancybox.js')
     script(src='../libs/fancybox/source/jquery.fancybox.pack.js')
     script(src='../js/controllers/company.js')
-    script(src='../libs/angular/angular.min.js')
     script(src='../js/Error.js')
     script(src='../js/Visualizer.js')
     script(src="../js/Stats.js")
+    script(src="../js/categories.js")
     script.
         var stats_data =!{JSON.stringify(stats)}
         var users_data =!{JSON.stringify(users)}
-
+        var all_categories =!{JSON.stringify(categories)}
         var stats_obj = Stats.getByType(stats_data);
         var users_obj = Stats.getByType(users_data);
 

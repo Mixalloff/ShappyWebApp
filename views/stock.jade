@@ -23,6 +23,12 @@ block content
                     form#edit_stock(enctype='multipart/form-data')
                         input(class="form-control", value='{{stock.name}}', name="name")
                         textarea(class="form-control", name="description") {{stock.description}}
+                        style
+                            include ../public/css/categories.css
+                        div#show_categories
+                            span {{stock.category}}
+                            i.fa.fa-caret-down
+                        div#categories
                         .img_wrapper
                             img(src="http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}", alt="logo")
                         a.fancybox(href="http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}") Посмотреть текущее изображение в полном размере
@@ -42,8 +48,9 @@ block additional_scripts
         script(src='../js/Error.js')
         script(src="../js/Stats.js")
         script(src="../js/Visualizer.js")
-
+        script(src="../js/categories.js")
         script.
+            var all_categories = !{JSON.stringify(categories)}
             var statistics = !{JSON.stringify(stats)}
             $("#graphics").css("display", "block");
             var statist = Stats.getByType(statistics);

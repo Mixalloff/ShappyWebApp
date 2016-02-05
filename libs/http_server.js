@@ -67,14 +67,19 @@ class Server {
                     if (err) return next(err);
                     fasad.getCountStocksPerDate(token, (err,stats)=> {
                         if (err) return next(err);
-                        console.log(stats);
                         fasad.getNumberOfSubsribitions(token, function(err,users) {
-                            res.render('company',{
-                                company: companyInfo,
-                                stocks: stocks.data,
-                                stats: stats,
-                                users: users
-                            });
+                            if (err) return next(err);
+                            fasad.getCategories((err,categories)=> {
+                                if (err) return next(err);
+                                res.render('company',{
+                                    company: companyInfo,
+                                    stocks: stocks.data,
+                                    stats: stats,
+                                    users: users,
+                                    categories: categories.data
+                                });
+                            })
+
                         });
                     });
                 });
@@ -87,11 +92,16 @@ class Server {
             fasad.getStockInfo(data,(err,stockInfo)=> {
                 if (err) return next(err);
                 fasad.getStatsForStock(data, (err,stats)=> {
-                    console.log(stockInfo);
-                    res.render('stock', {
-                        stock: stockInfo.data,
-                        stats: stats
+                    fasad.getCategories((err,categories)=> {
+                        if (err) return next(err);
+                        res.render('stock', {
+                            stock: stockInfo.data,
+                            stats: stats,
+                            categories: categories.data
+
+                        });
                     });
+
                 });
             });
         });

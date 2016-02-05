@@ -26,6 +26,7 @@ app.controller('Company', function($scope, $location) {
     $scope.add = function() {
         var formData = new FormData(formCreateStock[0]);
         formData.append("token",getCookie("token"));
+        formData.append("category",$("form#stock a.active").attr("id"));
         $.ajax({
             url: Config.createStock,
             type: "post",

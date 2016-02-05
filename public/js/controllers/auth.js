@@ -15,6 +15,7 @@ $(document).ready(function () {
         spinner.start("spinner_register");
         e.preventDefault();
         var formData = new FormData(formRegister[0]);
+        formData.append("category",$("form#signup a.active").attr("id"));
         $.ajax({
             url: Config.registerCompany,
             type: "post",

@@ -10,6 +10,7 @@ app.controller('Stock', function($scope,$http) {
         var form = $("#edit_stock");
         var formData = new FormData(form[0]);
         formData.append("token",getCookie("token"));
+        formData.append("category",$("form#edit_stock a.active").attr("id"));
         $.ajax({
             url: Config.editStock,
             type: "post",

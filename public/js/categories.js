@@ -40,9 +40,10 @@ $(document).ready(function() {
             $("#show_categories span").html( $(this).html());
         }
     });
-    document.getElementById("categories").appendChild(foo(all_categories,tree));
+   document.getElementById("categories").appendChild(foo(all_categories,tree));
+
 
     $("#show_categories").click(function() {
-        $("#categories").slideToggle();
+        $("div#categories").slideToggle();
     })
 });
