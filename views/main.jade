@@ -312,7 +312,7 @@ block content
             input(type='email', placeholder='Email', name='email')
             input(type='text', placeholder='ИНН')
             input(type='text', placeholder='ОГРН')
-            div#categories
+            include  includes/categories
             input(type='text', placeholder='Регион')
             input(type='text', placeholder='Адрес')
             input(type='file', name='logo', multiple='')
@@ -325,6 +325,7 @@ block additional_scripts
     script(src='../libs/spinner/spin.js')
     script(src='../js/controllers/auth.js')
     script(src='../js/Error.js')
+    script(src='../js/categories.js')
     script.
         var all_categories =!{JSON.stringify(categories)}
 
