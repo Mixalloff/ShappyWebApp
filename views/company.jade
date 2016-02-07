@@ -6,58 +6,80 @@ block additional_styles
     script(src='../libs/jquery/dist/jquery.min.js')
     script(src='../libs/jquery-ui/jquery-ui.min.js')
     link(rel='stylesheet', href='../libs/fancybox/source/jquery.fancybox.css')
+    link(rel="stylesheet", href="../libs/angular-material/angular-material.css")
 block content
-    div(ng-controller='Company',ng-init="stocks= #{JSON.stringify(stocks)}")
+    div(ng-controller='Company as company',ng-init="stocks= #{JSON.stringify(stocks)}")
         .container-fluid
-            .row
-                .header
-                    .col-md-6
-                        img#avatar(src='http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080#{company.data.logo}', alt='Brand')
-                        span#company_name #{company.data.name}
-                    .col-md-6
-                        a(href="/logout")#logout.btn.btn-default Выйти
+                md-toolbar
+                    .md-toolbar-tools(layout="row")
+                            img#avatar(src='http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080#{company.data.logo}', alt='Brand')
+                            h2
+                                span #{company.data.name}
+                            div(layout="row",flex,layout-align="end center")
+                                md-content.md-padding
+                                        md-fab-speed-dial(md-open='company.isOpen', md-direction='left', ng-class='company.selectedMode')
+                                            md-fab-trigger
+                                                md-button.md-fab.md-warn(aria-label='menu',style="padding-top:10px;")
+                                                    ng-md-icon(icon="menu",style="fill: #fff",size=35)
+                                            md-fab-actions
+                                                md-button.md-fab.md-raised.md-mini(aria-label='logout',href="/logout")
+                                                    ng-md-icon(icon="logout")
+                                                md-button.md-fab.md-raised.md-mini(aria-label='Facebook')
+                                                    ng-md-icon(icon="facebook")
+                                                md-button.md-fab.md-raised.md-mini(aria-label='twitter')
+                                                    ng-md-icon(icon="twitter")
+
         .container-fluid
-            .row
-                .col-md-1
-                    .menu
-                        ul
-                            a(href='main.html')
-                                li
-                                    i.fa.fa-home
-                            br
-                            li
-                                i.fa.fa-file
-                            br
-                            li
-                                i.fa.fa-bar-chart
-                .col-md-7
-                    .stats
-                        h4 Статистика
-                        #charts
-                .col-md-4
+            div(layout="row")
+                div.md-whiteframe-4dp.menu(md-is-locked-open='true',flex='20')
+                    md-list
+                        md-list-item
+                            md-button
+                                md-icon.icon(md-font-icon='fa fa-home')
+                                |                   Домашняя страница
+                        md-list-item
+                            md-button
+                                md-icon.icon(md-font-icon='fa fa-file')
+                                |                   Акции
+                        md-list-item
+                            md-button
+                                md-icon.icon(md-font-icon='fa fa-bar-chart')
+                                |                   Статистика
+
+                div(flex="55")
+                    .stats.md-whiteframe-4dp
+                        #countAdditionsPerDate
+                    .stats.md-whiteframe-4dp
+                        #countAdditionsPerStock
+                div(flex="25")
                     .stock_part
                         .stocks_head
                             h4 Акции
                             i.fa(ng-class="{' fa-sort-alpha-desc': isDown('startDate'),\
-              'fa-sort-alpha-asc': isUp('startDate')}")
+                          'fa-sort-alpha-asc': isUp('startDate')}")
                             span(ng-click="sort('startDate')")
                                 | Дата
                                 i.fa(ng-class="{'fa-chevron-down': isDown('startDate'),\
-                'fa-chevron-up': isUp('startDate')}")
-                            input.form-control(type='text', placeholder='Поиск акции...', ng-model='stock_name')
+                            'fa-chevron-up': isUp('startDate')}")
+                            md-button.md-raised.md-warn.fancybox(href='#stock') Добавить новую акцию
+                            div(layout="row")
+                                md-input-container(flex="100")
+                                    label Поиск акции
+                                    input(ng-model='stock_name')
                         .stocks
-                            .stock(ng-repeat='stock in stocks | filter:{name:stock_name} | orderBy:sortField:reverse ', class='{{stock.id}}', style='background: url(http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}})', data-name='{{stock.name}}', data-description='{{stock.description}}', data-path='{{stock.logo}}', data-startdate='{{stock.startDate}}', data-enddate='{{stock.endDate}}', data-id='{{stock.id}}'
-                            ng-click='go("/stockinfo/",stock.id)')
-                                p.stock_header(ng-click='go("/stockinfo/",stock.id)') {{stock.name}}
-                                a.fancybox.edit_btn(href='#edit', ng-click='update(stock.id); ', title='Быстрое редактирование')
-                                    i.fa.fa-pencil-square-o
-                                a.remove(ng-click='remove(stock.id);  $event.stopPropagation(); ', title='Удаление акции')
-                                    i.fa.fa-times
-                                p.stock_descr {{stock.description}}
-                                .date_wrapper
-                                    | {{stock.startDate | date:"dd.MM.yyyy"}} - {{stock.endDate | date:"dd.MM.yyyy"}}
-                        a.down_arrow.fancybox(href='#stock')
-                            i.fa.fa-plus-circle
+                            .stock(ng-repeat='stock in stocks | filter:{name:stock_name} | orderBy:sortField:reverse ', class='{{stock.id}}', data-log='{{stock.logo}}', data-name='{{stock.name}}', data-description='{{stock.description}}', data-path='{{stock.logo}}', data-startdate='{{stock.startDate}}', data-enddate='{{stock.endDate}}', data-id='{{stock.id}}')
+                                div(layout='column')
+                                    md-card
+                                        md-card-title
+                                            md-card-title-text
+                                                span.md-headline {{stock.name}}
+                                        a.fancybox(href='http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}')
+                                            img.md-card-image(ng-src='http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}', alt='stock image')
+
+                                        md-card-content {{stock.description}}
+                                        md-card-actions(layout='row', layout-align='end center')
+                                            md-button(ng-click='go("/stockinfo/",stock.id)') Редактировать
+                                            md-button(ng-click='remove(stock.id)')  Удалить
         form#stock(ng-submit='add()', name='stock', enctype='multipart/form-data')
             h4 Создание акции
             input.form-control(type='text', name='name', placeholder='Заголовок')
@@ -78,6 +100,10 @@ block content
             button.btn.btn-primary(type='submit') Сохранить
 block additional_scripts
     script(src='../libs/angular/angular.min.js')
+    script(src='./libs/angular-animate/angular-animate.js', type='text/javascript')
+    script(src='./libs/angular-aria/angular-aria.js', type='text/javascript')
+    script(src='./libs/angular-material/angular-material.js', type='text/javascript')
+    script(src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.5.0/angular-material-icons.min.js")
     script(src='../libs/Chart.js/Chart.js')
     script(src='../libs/fancybox/source/jquery.fancybox.js')
     script(src='../libs/fancybox/source/jquery.fancybox.pack.js')
@@ -96,6 +122,6 @@ block additional_scripts
         var GraphicF = Visualizer.getByType(stats_data.type);
         var GraphicS = Visualizer.getByType(users_data.type);
 
-        new GraphicF(stats_obj).createCanvas(600, 200, 'Общее количество добавленных пользователями акций').appendTo('charts');
+        new GraphicF(stats_obj).createCanvas(600, 200, 'Общее количество добавленных пользователями акций').appendTo('countAdditionsPerDate');
 
-        new GraphicS(users_obj).createCanvas(300, 200, 'Количество пользователей по каждой акции').appendTo('charts');
+        new GraphicS(users_obj).createCanvas(300, 200, 'Количество пользователей по каждой акции').appendTo('countAdditionsPerStock');

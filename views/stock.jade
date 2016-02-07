@@ -26,13 +26,14 @@ block content
                         style
                             include ../public/css/categories.css
                         div#show_categories
-                            span {{stock.category}}
+                            span {{stock.category.name}}
                             i.fa.fa-caret-down
                         div#categories
                         .img_wrapper
                             img(src="http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}", alt="logo")
                         a.fancybox(href="http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}") Посмотреть текущее изображение в полном размере
                         input.form-control(type="file", name="logo")
+                        input.form-control.date(name="startDate", value='{{stock.startDate | date:"MM/dd/yyyy"}}')
                         input.form-control.date(name="endDate", value='{{stock.endDate | date:"MM/dd/yyyy"}}')
                         input(type="hidden", value="{{stock.id}}", name="id")
                         .button_wrapper

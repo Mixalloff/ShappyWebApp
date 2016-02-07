@@ -15,5 +15,11 @@
     "public/libs",
     "test",
     "tests"
-  ]
+  ],
+  "devDependencies": {
+    "angular-material": "~1.0.5"
+  },
+  "dependencies": {
+    "angular-material-icons": "~0.6.0"
+  }
 }

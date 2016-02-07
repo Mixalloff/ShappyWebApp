@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('app',[]);
+var app = angular.module('app',['ngMaterial','ngMdIcons']);
 
 var formCreateStock = $("#stock");
 
@@ -20,8 +20,11 @@ $(".menu li").hover(
 );
 
 
-app.controller('Company', function($scope, $location) {
+app.controller('Company', function($scope) {
 
+
+    this.isOpen = false;
+    this.selectedMode = 'md-fling';
     //добавление акции
     $scope.add = function() {
         var formData = new FormData(formCreateStock[0]);
