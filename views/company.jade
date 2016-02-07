@@ -57,7 +57,7 @@ block content
                             h4 Акции
                             i.fa(ng-class="{' fa-sort-alpha-desc': isDown('startDate'),\
                           'fa-sort-alpha-asc': isUp('startDate')}")
-                            span(ng-click="sort('startDate')")
+                            span.filter(ng-click="sort('startDate')")
                                 | Дата
                                 i.fa(ng-class="{'fa-chevron-down': isDown('startDate'),\
                             'fa-chevron-up': isUp('startDate')}")
