@@ -1,57 +1,23 @@
 extends _layout
 block additional_styles
-    title #{company.data.name}
+    title
     link(rel='stylesheet', href='../css/company.css')
-    link(rel='stylesheet', href='../libs/jquery-ui/themes/smoothness/jquery-ui.min.css')
-    script(src='../libs/jquery/dist/jquery.min.js')
-    script(src='../libs/jquery-ui/jquery-ui.min.js')
     link(rel='stylesheet', href='../libs/fancybox/source/jquery.fancybox.css')
     link(rel="stylesheet", href="../libs/angular-material/angular-material.css")
+    link(rel="stylesheet", href="../css/categories.css")
+    link(rel="stylesheet", href="../libs/lf-ng-md-file-input/dist/lf-ng-md-file-input.css")
 block content
     div(ng-controller='Company as company',ng-init="stocks= #{JSON.stringify(stocks)}")
-        .container-fluid
-                md-toolbar
-                    .md-toolbar-tools(layout="row")
-                            img#avatar(src='http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080#{company.data.logo}', alt='Brand')
-                            h2
-                                span #{company.data.name}
-                            div(layout="row",flex,layout-align="end center")
-                                md-content.md-padding
-                                        md-fab-speed-dial(md-open='company.isOpen', md-direction='left', ng-class='company.selectedMode')
-                                            md-fab-trigger
-                                                md-button.md-fab.md-warn(aria-label='menu',style="padding-top:10px;")
-                                                    ng-md-icon(icon="menu",style="fill: #fff",size=35)
-                                            md-fab-actions
-                                                md-button.md-fab.md-raised.md-mini(aria-label='logout',href="/logout")
-                                                    ng-md-icon(icon="logout")
-                                                md-button.md-fab.md-raised.md-mini(aria-label='Facebook')
-                                                    ng-md-icon(icon="facebook")
-                                                md-button.md-fab.md-raised.md-mini(aria-label='twitter')
-                                                    ng-md-icon(icon="twitter")
-
+        include includes/toolbar
         .container-fluid
             div(layout="row")
-                div.md-whiteframe-4dp.menu(md-is-locked-open='true',flex='20')
-                    md-list
-                        md-list-item
-                            md-button
-                                md-icon.icon(md-font-icon='fa fa-home')
-                                |                   Домашняя страница
-                        md-list-item
-                            md-button
-                                md-icon.icon(md-font-icon='fa fa-file')
-                                |                   Акции
-                        md-list-item
-                            md-button
-                                md-icon.icon(md-font-icon='fa fa-bar-chart')
-                                |                   Статистика
-
-                div(flex="55")
+                include includes/sidebar
+                div.content(flex="55",flex-offset="20")
                     .stats.md-whiteframe-4dp
                         #countAdditionsPerDate
                     .stats.md-whiteframe-4dp
                         #countAdditionsPerStock
-                div(flex="25")
+                div.right_stocks(flex="25")
                     .stock_part
                         .stocks_head
                             h4 Акции
@@ -61,7 +27,7 @@ block content
                                 | Дата
                                 i.fa(ng-class="{'fa-chevron-down': isDown('startDate'),\
                             'fa-chevron-up': isUp('startDate')}")
-                            md-button.md-raised.md-warn.fancybox(href='#stock') Добавить новую акцию
+                            md-button.md-raised.md-warn(ng-click="showAddDialog($event)") Добавить новую акцию
                             div(layout="row")
                                 md-input-container(flex="100")
                                     label Поиск акции
@@ -73,6 +39,8 @@ block content
                                         md-card-title
                                             md-card-title-text
                                                 span.md-headline {{stock.name}}
+                                                md-button.md-fab.md-raised.md-mini(ng-click="showEditDialog($event, stock.id)",aria-label='more_vert',style="padding-top:5px")
+                                                    ng-md-icon(icon="more_vert")
                                         a.fancybox(href='http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}')
                                             img.md-card-image(ng-src='http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}', alt='stock image')
 
@@ -80,42 +48,35 @@ block content
                                         md-card-actions(layout='row', layout-align='end center')
                                             md-button(ng-click='go("/stockinfo/",stock.id)') Редактировать
                                             md-button(ng-click='remove(stock.id)')  Удалить
-        form#stock(ng-submit='add()', name='stock', enctype='multipart/form-data')
-            h4 Создание акции
-            input.form-control(type='text', name='name', placeholder='Заголовок')
-            textarea#description.form-control(name='description', cols='30', rows='7', placeholder='Текст акции')
-            input.form-control(name='logo', type='file')
-            include  includes/categories
-            input.form-control.date(name='startDate', type='text', placeholder='Дата начала')
-            input.form-control.date(name='endDate', type='text', placeholder='Дата окончания')
-            button.btn.btn-primary(type='submit') Добавить
-        form#edit
-            h4 Редактирование акции
-            input.form-control(type='text', name='name', placeholder='Заголовок')
-            textarea.form-control(name='description', cols='30', rows='7', placeholder='Текст акции')
-            input.form-control(name='logo', type='file')
-            include  includes/categories
-            input.form-control.date(name='startDate', type='text', placeholder='Дата начала')
-            input.form-control.date(name='endDate', type='text', placeholder='Дата окончания')
-            button.btn.btn-primary(type='submit') Сохранить
+form#edit
+    h4 Редактирование акции
+    input.form-control(type='text', name='name', placeholder='Заголовок')
+    textarea.form-control(name='description', cols='30', rows='7', placeholder='Текст акции')
+    input.form-control(name='logo', type='file')
+    include  includes/categories
+    input.form-control.date(name='startDate', type='text', placeholder='Дата начала')
+    input.form-control.date(name='endDate', type='text', placeholder='Дата окончания')
+    button.btn.btn-primary(type='submit') Сохранить
 block additional_scripts
+    script(src='../libs/jquery/dist/jquery.min.js')
     script(src='../libs/angular/angular.min.js')
-    script(src='./libs/angular-animate/angular-animate.js', type='text/javascript')
-    script(src='./libs/angular-aria/angular-aria.js', type='text/javascript')
-    script(src='./libs/angular-material/angular-material.js', type='text/javascript')
+    script(src='../libs/angular-animate/angular-animate.js', type='text/javascript')
+    script(src='../libs/angular-aria/angular-aria.js', type='text/javascript')
+    script(src='../libs/angular-material/angular-material.js', type='text/javascript')
+    script(src="../libs/lf-ng-md-file-input/dist/lf-ng-md-file-input.js")
     script(src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.5.0/angular-material-icons.min.js")
     script(src='../libs/Chart.js/Chart.js')
+    script(src="../libs/ng-file-upload/ng-file-upload.js")
     script(src='../libs/fancybox/source/jquery.fancybox.js')
     script(src='../libs/fancybox/source/jquery.fancybox.pack.js')
     script(src='../js/controllers/company.js')
     script(src='../js/Error.js')
     script(src='../js/Visualizer.js')
     script(src="../js/Stats.js")
-    script(src="../js/categories.js")
     script.
-        var stats_data =!{JSON.stringify(stats)}
-        var users_data =!{JSON.stringify(users)}
-        var all_categories =!{JSON.stringify(categories)}
+        var stats_data = !{JSON.stringify(stats)};
+        var users_data = !{JSON.stringify(users)};
+        var all_categories = !{JSON.stringify(categories)};
         var stats_obj = Stats.getByType(stats_data);
         var users_obj = Stats.getByType(users_data);
 
@@ -125,3 +86,62 @@ block additional_scripts
         new GraphicF(stats_obj).createCanvas(600, 200, 'Общее количество добавленных пользователями акций').appendTo('countAdditionsPerDate');
 
         new GraphicS(users_obj).createCanvas(300, 200, 'Количество пользователей по каждой акции').appendTo('countAdditionsPerStock');
+    script(type='text/ng-template', id='dialog1.tmpl.html').
+
+        <md-dialog aria-label="AddDialog" ng-cloak>
+        <form id='stocks' name='stock' ng-submit='submit()' enctype='multipart/form-data'>
+        <md-toolbar>
+        <div class="md-toolbar-tools">
+        <h2>Добавление акции</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+        <ng-md-icon icon="close" style="fill: #fff" aria-label="Close dialog"></ng-md-icon>
+        </md-button>
+        </div>
+        </md-toolbar>
+
+
+        <md-dialog-content>
+        <div class="md-dialog-content">
+        <md-input-container class="md-block">
+        <label>Название акции</label>
+        <input ng-model="obj.name" name="name">
+        </md-input-container>
+        <md-input-container class="md-block">
+        <label>Описание акции</label>
+        <input  ng-model="obj.description" name="description">
+        </md-input-container>
+        <div id="show_categories">
+        <md-input-container class="md-block" style="margin-bottom: 0">
+        <label>Категория</label>
+        <input ng-model="obj.category">
+        </md-input-container>
+        </div>
+        <div id="categories"></div>
+        <lf-ng-md-file-input  lf-placeholder='Загрузите картинку для акции' lf-files="files" preview></lf-ng-md-file-input>
+        <div layout="column">
+        <md-datepicker-input-container flex>
+        <md-datepicker ng-model='obj.startDate' md-placeholder='Дата создания'></md-datepicker>
+        </md-datepicker-input-container>
+
+        <md-datepicker-input-container flex>
+        <md-datepicker ng-model='obj.endDate' md-placeholder='Дата окончания' name='endDate' > </md-datepicker>
+        </md-datepicker-input-container>
+        </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+        <md-button type="submit">
+        Добавить акцию
+        </md-button>
+        <md-button ng-click="hide()" style="margin-right:20px;">
+        Закрыть
+        </md-button>
+        </md-dialog-actions>
+        </form>
+        </md-dialog>
+        <script src="../js/categories.js"> </script>
+
+
+
+

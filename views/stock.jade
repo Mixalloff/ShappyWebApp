@@ -2,47 +2,62 @@ extends _layout
 block additional_styles
     title #{stock.name}
     link(rel="stylesheet", href="../css/stock.css")
-    link(rel='stylesheet', href='../libs/jquery-ui/themes/smoothness/jquery-ui.min.css')
     script(src='../libs/jquery/dist/jquery.min.js')
-    script(src='../libs/jquery-ui/jquery-ui.min.js')
     link(rel='stylesheet', href='../libs/fancybox/source/jquery.fancybox.css')
+    link(rel="stylesheet", href="../libs/angular-material/angular-material.css")
+    link(rel="stylesheet", href="../libs/lf-ng-md-file-input/dist/lf-ng-md-file-input.css")
 block content
-        script.
-            $(function () {
-                $(".date").datepicker();
-            });
-        .stock(ng-controller='Stock',ng-init="stock= #{JSON.stringify(stock)}")
-            h3 Акция '{{stock.name}}'
-            ul.nav.nav-tabs
-                li.active
-                    a(data-toggle='tab', href='#edit') Редактирование
-                li
-                    a(data-toggle='tab', href='#graphics') Статистика
-            .tab-content
-                #edit.tab-pane.fade.in.active
-                    form#edit_stock(enctype='multipart/form-data')
-                        input(class="form-control", value='{{stock.name}}', name="name")
-                        textarea(class="form-control", name="description") {{stock.description}}
-                        style
-                            include ../public/css/categories.css
-                        div#show_categories
-                            span {{stock.category.name}}
-                            i.fa.fa-caret-down
-                        div#categories
-                        .img_wrapper
-                            img(src="http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}", alt="logo")
-                        a.fancybox(href="http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}") Посмотреть текущее изображение в полном размере
-                        input.form-control(type="file", name="logo")
-                        input.form-control.date(name="startDate", value='{{stock.startDate | date:"MM/dd/yyyy"}}')
-                        input.form-control.date(name="endDate", value='{{stock.endDate | date:"MM/dd/yyyy"}}')
-                        input(type="hidden", value="{{stock.id}}", name="id")
-                        .button_wrapper
-                            button.btn.btn-success.form-control(type="submit", ng-click="editStock()") Сохранить
-                #graphics.tab-pane.fade
-                    #charts
+    .stock(ng-controller='Stock',ng-init="stock= #{JSON.stringify(stock)};")
+        include includes/toolbar
+        .container-fluid
+            div(layout="row")
+                include includes/sidebar
+                div.edit_block.md-whiteframe-4dp(flex,flex-offset="20")
+                    md-content
+                        md-tabs(md-dynamic-height='', md-border-bottom='')
+                            md-tab(label='Редактирование')
+                                md-content.md-padding
+                                    form#edit_stock(ng-submit='submit()' enctype='multipart/form-data')
+                                        md-input-container.md-block
+                                            label Название акции
+                                            input(value='{{stock.name}}', name="name")
+                                        md-input-container.md-block
+                                            label Описание акции
+                                            textarea(rows='5', md-select-on-focus='', name="description") {{stock.description}}
+                                        style
+                                            include ../public/css/categories.css
+                                        div#show_categories
+                                            md-input-container.md-block(style="margin-bottom: 0")
+                                                label Категория
+                                                input(value='{{stock.category.name}}' name="category")
+                                        div#categories
+                                        .img_wrapper
+                                            img(src="http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}", alt="logo")
+                                        a.fancybox(href="http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}") Посмотреть текущее изображение в полном размере
+                                        lf-ng-md-file-input(lf-files='files',lf-browse-label="Выбрать", type='file', lf-placeholder='Загрузите новую картинку для акции', name='logo', preview='')
+                                        div(layout="row")
+                                                md-datepicker-input-container(flex="50")
+                                                    md-datepicker(ng-model='obj.startDate', md-placeholder='Дата создания акции')
+                                                md-datepicker-input-container(flex="50")
+                                                    md-datepicker(ng-model='obj.endDate', md-placeholder='Дата окончания акции')
+
+                                        input(type="hidden", value="{{stock.id}}", name="id")
+                                        .button_wrapper
+                                            md-button.md-raised.md-primary(type='submit') Сохранить
+                            md-tab(label='Статистика',md-on-select='onTabSelected(tab)')
+                                md-content.md-padding
+                                    #graphics.tab-pane
+                                        #funnel
+                                        #charts
+
 block additional_scripts
-        script(src='../libs/Chart.js/Chart.js')
         script(src='../libs/angular/angular.min.js')
+        script(src='../libs/angular-animate/angular-animate.js', type='text/javascript')
+        script(src='../libs/angular-aria/angular-aria.js', type='text/javascript')
+        script(src='../libs/angular-material/angular-material.js', type='text/javascript')
+        script(src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.5.0/angular-material-icons.min.js")
+        script(src="../libs/lf-ng-md-file-input/dist/lf-ng-md-file-input.js")
+        script(src='../libs/Chart.js/Chart.js')
         script(src='../libs/fancybox/source/jquery.fancybox.js')
         script(src='../libs/fancybox/source/jquery.fancybox.pack.js')
         script(src='../js/controllers/stock.js')
@@ -51,10 +66,10 @@ block additional_scripts
         script(src="../js/Visualizer.js")
         script(src="../js/categories.js")
         script.
-            var all_categories = !{JSON.stringify(categories)}
-            var statistics = !{JSON.stringify(stats)}
-            $("#graphics").css("display", "block");
-            var statist = Stats.getByType(statistics);
-            var Graphic = Visualizer.getByType(statistics.type);
-            new Graphic(statist).createCanvas(600,200,"Количество добавлений этой акции пользователями по дням").appendTo('charts');
+
+            var all_categories = !{JSON.stringify(categories)};
+            var statistics = !{JSON.stringify(stats)};
+            var funnel_stats = !{JSON.stringify(funnel)};
+            var enable_graphics = false;
+
 

@@ -1,0 +1,22 @@
+
+style
+    include ../../public/css/toolbar.css
+div(layout="column")
+    md-toolbar.top
+        .md-toolbar-tools(layout="row")
+            img#avatar(src='', alt='Brand')
+            h2
+                span#company_name
+            div(layout="row",flex,layout-align="end center")
+                md-content.md-padding
+                    md-fab-speed-dial(md-open='company.isOpen', md-direction='left', ng-class='company.selectedMode')
+                        md-fab-trigger
+                            md-button.md-fab.md-warn(aria-label='menu',style="padding-top:10px;")
+                                ng-md-icon(icon="menu",style="fill: #fff",size=35)
+                        md-fab-actions
+                            md-button.md-fab.md-raised.md-mini(aria-label='logout',href="/logout")
+                                ng-md-icon(icon="logout")
+                            md-button.md-fab.md-raised.md-mini(aria-label='Facebook')
+                                ng-md-icon(icon="facebook")
+                            md-button.md-fab.md-raised.md-mini(aria-label='twitter')
+                                ng-md-icon(icon="twitter")

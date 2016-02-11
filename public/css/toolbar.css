@@ -1,0 +1,17 @@
+md-toolbar.top {
+    position: fixed;
+}
+.md-toolbar-tools {
+    background-color: #4CB050;
+}
+.md-toolbar-tools img
+{
+    height: 50px;
+}
+.md-toolbar-tools md-content {
+    background-color: transparent;
+}
+.md-toolbar-tools md-content button,.md-toolbar-tools md-content  a
+{
+    padding-top: 5px;
+}

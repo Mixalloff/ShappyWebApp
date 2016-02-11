@@ -37,7 +37,9 @@ $(document).ready(function() {
         } else {
             $('#categories a').css("background-color","#fff").removeClass("active");
             $(this).css("background-color","#8FA0FF").addClass("active");
-            $("#show_categories span").html( $(this).html());
+            console.log($(this).html());
+            console.log( $("#show_categories input"));
+            $("#show_categories input").val( $(this).html());
         }
     });
    document.getElementById("categories").appendChild(foo(all_categories,tree));

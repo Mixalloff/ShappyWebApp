@@ -52,3 +52,12 @@ var Config = {
 
 
 };
+function convertToFormData(obj)
+{
+  var formData = new FormData();
+  for (var item in obj)
+  {
+    formData.append(item, obj[item]);
+  }
+  return formData;
+}

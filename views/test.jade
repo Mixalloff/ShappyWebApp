@@ -1,0 +1,32 @@
+md-dialog(aria-label='Создание акции', ng-cloak='')
+    form
+        md-toolbar
+            .md-toolbar-tools
+                h2 Создание акции
+                span(flex='')
+                md-button.md-fab.md-raised.md-mini(aria-label='Close')
+                    ng-md-icon(icon="close")
+        md-dialog-content
+            .md-dialog-content
+                form#stock(ng-submit='add()', name='stock', enctype='multipart/form-data')
+                    md-input-container.md-block
+                        label Название акции
+                        input(name="name")
+                    md-input-container.md-block
+                        label Описание акции
+                        textarea(rows='5', md-select-on-focus='', name="description")
+                    style
+                        include ../public/css/categories.css
+                    div#show_categories
+                        span {{stock.category.name}}
+                        i.fa.fa-caret-down
+                    div#categories
+                    lf-ng-md-file-input(lf-files='files',lf-browse-label="Выбрать", type='file', lf-placeholder='Загрузите новую картинку для акции', name='logo', preview='')
+                    div(layout="row")
+                        md-datepicker-input-container(flex="50")
+                            md-datepicker(ng-model='myDate', md-placeholder='Дата создания акции')
+                        md-datepicker-input-container(flex="50")
+                            md-datepicker(ng-model='endDate', md-placeholder='Дата окончания акции')
+        md-dialog-actions(layout='row')
+            md-button(href='http://en.wikipedia.org/wiki/Mango', target='_blank', md-autofocus='')
+                | More on Wikipedia

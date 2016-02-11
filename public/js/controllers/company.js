@@ -1,9 +1,15 @@
 'use strict';
 
-var app = angular.module('app',['ngMaterial','ngMdIcons']);
-
-var formCreateStock = $("#stock");
-
+var app = angular.module('app',['ngMaterial','ngMdIcons','lfNgMdFileInput'])
+.directive("lfFiles", function () {
+    return {
+        link: function (scope, element, attrs) {
+            scope.$watch(attrs.lfFiles, function(val) {
+                scope.logo = val;
+            });
+        }
+    };
+});
 
 var menu_items = Config.menuCompanyItems;
 
@@ -20,52 +26,92 @@ $(".menu li").hover(
 );
 
 
-app.controller('Company', function($scope) {
+app.controller('Company', function($scope,$mdDialog, $mdMedia) {
 
 
     this.isOpen = false;
     this.selectedMode = 'md-fling';
-    //добавление акции
-    $scope.add = function() {
-        var formData = new FormData(formCreateStock[0]);
-        formData.append("token",getCookie("token"));
-        formData.append("category",$("form#stock a.active").attr("id"));
-        $.ajax({
-            url: Config.createStock,
-            type: "post",
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (resultJSON) {
-                if (resultJSON.type == 'stock')
-                {
-                    var new_obj = new Object();
-                    formCreateStock.serializeArray().forEach(function(item) {
-                        if (item.name=="startDate" || item.name=="endDate")
-                        {
-                            new_obj[item.name] = new Date(item.value);
-                        }
-                        else
-                        new_obj[item.name] = item.value;
-                       });
-                    new_obj['id'] = resultJSON.data.id;
-                    new_obj['logo'] = resultJSON.data.logo;
-                    $scope.stocks.unshift(new_obj);
-                    $scope.$apply();
-                    $.fancybox.close();
-                }
+
+    $scope.showDialog = (ev,id) => {
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: 'dialog1.tmpl.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: useFullScreen,
+            locals: {
+                stocks : $scope.stocks
             },
-            error: function () {
-                alertify.notify(Config.mesWrongAddStock, 'error');
+            onComplete: ()=> {
+                if (id) {
+                    var current;
+                    $scope.stocks.forEach((item)=> {
+                        if (item.id==id) current = item;
+                    });
+                    $scope.obj = current;
+                    $scope.update(id);
+                }
             }
         });
     };
+    $scope.showAddDialog = function(ev) {
+        $scope.showDialog(ev,null);
+    };
+    $scope.showEditDialog = function(ev, id) {
+        $scope.showDialog(ev,id);
+    };
+
+function DialogController($scope, $mdDialog, $http, stocks) {
+
+    $scope.stocks = stocks;
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+
+    $scope.submit  = function() {
+        $scope.obj.category = $("form#stocks a.active").attr("id");
+        $scope.obj.token = getCookie("token");
+        var formData = convertToFormData($scope.obj);
+         formData.append("logo",$scope.logo[0].lfFile);
+
+        $http({
+            method: 'POST',
+            url: Config.createStock,
+            data: formData,
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        }).then(function successCallback(resultJSON) {
+            resultJSON = resultJSON.data;
+            if (resultJSON.type == 'stock') {
+                var new_obj = new Object();
+                Object.keys($scope.obj).forEach((item)=> {
+                    new_obj[item] = $scope.obj[item];
+                });
+                new_obj['id'] = resultJSON.data.id;
+                new_obj['logo'] = resultJSON.data.logo;
+                $scope.stocks.unshift(new_obj);
+                $scope.$apply();
+                $scope.hide();
+            }
+        }, function errorCallback(response) {
+            alertify.notify(Config.mesWrongAddStock, 'error');
+        });
+    };
+}
     $(".fancybox").fancybox();
     //обновление акции
+
     $scope.update = function(stock_id) {
+
         var stockForm = document.getElementsByClassName(stock_id)[0];
-        var formEdit = document.getElementById("edit");
+        var formEdit = document.getElementById("stocks");
+
         [].forEach.call(formEdit.childNodes,function(element){
             if (element.nodeType != Node.TEXT_NODE)
             {
@@ -110,12 +156,10 @@ app.controller('Company', function($scope) {
                         $scope.$apply();
                     }
                 });
-                $.fancybox.close();
             }).error(function(data) {
                 alertify.notify(Config.mesWrongEditStock, 'error');
             })
         };
-        $(stockForm).children("a#edit").fancybox();
         };
 
     //удаление акции

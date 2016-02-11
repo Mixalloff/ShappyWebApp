@@ -1,4 +1,5 @@
 {
   "port" : 8079,
-  "host": "http://localhost"
+  "host": "http://localhost",
+  "api": "http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080/"
 }

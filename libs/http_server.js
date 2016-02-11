@@ -8,6 +8,7 @@ var HttpError = require('../error/http_error');
 var ErrorHandler = require('errorhandler');
 var cookieParser = require('cookie-parser');
 var fasad = require('../middlewares/fasad');
+var config = require('../config/config');
 
 var app = express();
 
@@ -71,8 +72,9 @@ class Server {
                             if (err) return next(err);
                             fasad.getCategories((err,categories)=> {
                                 if (err) return next(err);
+                                res.cookie('company_name', companyInfo.data.name, { maxAge: 10e+10 });
+                                res.cookie("company_logo",config.get("api")+companyInfo.data.logo,{ maxAge: 10e+10 });
                                 res.render('company',{
-                                    company: companyInfo,
                                     stocks: stocks.data,
                                     stats: stats,
                                     users: users,
@@ -94,12 +96,26 @@ class Server {
                 fasad.getStatsForStock(data, (err,stats)=> {
                     fasad.getCategories((err,categories)=> {
                         if (err) return next(err);
-                        res.render('stock', {
-                            stock: stockInfo.data,
-                            stats: stats,
-                            categories: categories.data
+                        console.log(categories);
+                        fasad.getStockFunnel(data,(err,funnel)=>
+                        {
+                            if (err) return next(err);
+                            console.log(funnel);
+                            res.render('stock', {
+                                stock: stockInfo.data,
+                                funnel: funnel/* {type:'stockinfo', data: {
+                                    viewsInFeed: 100,
+                                    views: 50,
+                                    subscribes: 20,
+                                    uses: 10,
+                                    reuses: 3
+                                }}*/,
+                                stats: stats,
+                                categories: categories.data
 
+                            });
                         });
+
                     });
 
                 });

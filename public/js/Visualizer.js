@@ -5,7 +5,8 @@ class Visualizer {
     static get routes() {
         return {
             'line': LineChart,
-            'pie': PieChart
+            'pie': PieChart,
+            'funnel': FunnelChart
         }
     };
 
@@ -13,7 +14,8 @@ class Visualizer {
         var routes = {
             'stocksperdate': 'line',
             'usersperstock': 'line',
-            'countperstock': 'pie'
+            'countperstock': 'pie',
+            'stockinfo': 'funnel'
         };
         return routes[RequestType] || 'line';
     }
@@ -32,11 +34,8 @@ class AbstractChart {
 
     createCanvas(width,height,header) {
         this.canvas = document.createElement('canvas');
-        this.table = document.createElement('div');
         this.header = document.createElement('h5');
         this.header.innerHTML = header;
-        this.table.className = 'list-group';
-        this.table.style.display = 'inline-block';
         this.canvas.width = width;
         this.canvas.height = height;
         return this;
@@ -49,7 +48,6 @@ class AbstractChart {
         var parent = document.getElementById(id);
         parent.appendChild(this.header);
         parent.appendChild(this.canvas);
-        parent.appendChild(this.table);
         this.fillCanvas();
     }
 }
@@ -90,18 +88,7 @@ class PieChart extends  AbstractChart {
     generateData() {
         this.data=[];
         for (var item in this.stats.data) {
-            var button = document.createElement('button');
-            button.className='list-group-item';
-            button.innerHTML = item;
-            this.table.appendChild(button);
             var color = PieChart.GetRandomColor();
-            var label = document.createElement('div');
-            label.style.width = '10px';
-            label.style.height = '10px';
-            label.style.backgroundColor = color;
-            label.style.display = 'inline-block';
-            label.style.marginLeft = '10px';
-            button.appendChild(label);
             this.data.push(
             {
                 value: this.stats.data[item],
@@ -117,3 +104,99 @@ class PieChart extends  AbstractChart {
         new Chart(this.getCanvas()).Pie(this.data);
     }
 }
+class Doughnut extends PieChart {
+
+    constructor(stats,color,highlight)
+    {
+        super(stats);
+        this.color = color;
+        this.highlight = highlight;
+    }
+    generateData() {
+
+            this.data=[];
+            this.data.push(
+                {
+                    value: this.stats,
+                    color:this.color
+                }
+            );
+            this.data.push(
+                {
+                    value: 100 - this.stats,
+                    color: this.highlight
+                }
+            )
+        }
+    fillCanvas() {
+        this.generateData();
+        var ctx = this.getCanvas();
+        var val = this.stats;
+        new Chart(this.getCanvas()).Doughnut(this.data, {
+            percentageInnerCutout: 70,
+        });
+    };
+}
+
+class FunnelChart extends  AbstractChart {
+
+
+    generateData() {
+        var settings = {
+            viewsInFeed: {
+                color: "#441AAD",
+                highlight: "#967ADE",
+                tip: "Выдачи"
+            },
+            views: {
+                color: "#521573",
+                highlight: "#A678BF",
+                tip: "Просмотры"
+            },
+            subscribes: {
+                color: "#259C13",
+                highlight: "#7CDE6D",
+                tip: "Подписки"
+            },
+            uses: {
+                color: "#D4D408",
+                highlight: "#FCF9AE",
+                tip: "Использования"
+            },
+            reuses: {
+                color: "#DE1818",
+                highlight: "#FFD4D4",
+                tip: "Повторные использования"
+            }
+        };
+        this.doughnuts = [];
+        Object.keys(this.stats.data).forEach((item)=> {
+            this.doughnuts.push(new Doughnut(this.stats.data[item],settings[item].color,settings[item].highlight).createCanvas(180,180,settings[item].tip))
+        });
+    }
+    fillCanvas() {
+        this.generateData();
+    };
+    createCanvas(width,height,header) {
+        return this;
+    }
+    appendTo(id) {
+        this.fillCanvas();
+        var parent = document.getElementById(id);
+        this.doughnuts.forEach((item)=> {
+            var block  = document.createElement("div");
+            block.className = "doughnut";
+            var percent = document.createElement("span");
+            percent.className = "percent";
+            percent.innerHTML = item.stats+"%";
+            block.appendChild(percent);
+
+            block.appendChild(item.header);
+            block.appendChild(item.canvas);
+            parent.appendChild(block);
+            item.fillCanvas();
+        });
+
+    }
+}
+

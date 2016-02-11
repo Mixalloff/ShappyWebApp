@@ -1,0 +1,21 @@
+.menu {
+    background-color: #fff;
+    position: fixed !important;
+    margin-top: 64px;
+}
+.menu .md-button {
+    width: 100%;
+    text-align: left;
+    height: 55px;
+    line-height: 55px;
+    font-size: 13px;
+    font-weight: bold;
+}
+.menu .md-button:hover,.menu .md-button:active, .menu .md-button:visited {
+    color: #000000;
+}
+.menu .md-button .icon {
+    font-size: 30px;
+    margin-right: 30px;
+    width: 25px;
+}
