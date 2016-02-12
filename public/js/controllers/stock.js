@@ -14,13 +14,12 @@ var app = angular.module('app',['ngMaterial','ngMdIcons','lfNgMdFileInput'])
 $(".fancybox").fancybox();
 app.controller('Stock', function($scope) {
     $scope.submit = function() {
-
         var formData =new FormData($("form#edit_stock")[0]);
         formData.append("category",$("form#edit_stock a.active").attr("id"));
         formData.append("token",getCookie("token"));
         if ($scope.logo[0]) formData.append("logo",$scope.logo[0].lfFile);
-        formData.append("startDate",$scope.obj.startDate);
-        formData.append("endDate",$scope.obj.endDate);
+        formData.append("startDate",$scope.stock.startDate);
+        formData.append("endDate",$scope.stock.endDate);
         $.ajax({
             url: Config.editStock,
             type: "post",
@@ -35,6 +34,10 @@ app.controller('Stock', function($scope) {
         }).error(function (data) {
 
         })
+    };
+    $scope.prepareStock = ()=> {
+     $scope.stock.startDate = new Date($scope.stock.startDate);
+     $scope.stock.endDate = new Date($scope.stock.endDate);
     };
 
     $scope.onTabSelected = (tab)=> {

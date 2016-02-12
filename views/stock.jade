@@ -7,7 +7,10 @@ block additional_styles
     link(rel="stylesheet", href="../libs/angular-material/angular-material.css")
     link(rel="stylesheet", href="../libs/lf-ng-md-file-input/dist/lf-ng-md-file-input.css")
 block content
-    .stock(ng-controller='Stock',ng-init="stock= #{JSON.stringify(stock)};")
+    - var stringToDate = function(str){
+    -   return new Date(str);
+    - }
+    .stock(ng-controller='Stock',ng-init="stock= #{JSON.stringify(stock)}; prepareStock();")
         include includes/toolbar
         .container-fluid
             div(layout="row")
@@ -20,16 +23,16 @@ block content
                                     form#edit_stock(ng-submit='submit()' enctype='multipart/form-data')
                                         md-input-container.md-block
                                             label Название акции
-                                            input(value='{{stock.name}}', name="name")
+                                            input(value='{{stock.name}}',ng-model='stock.name', name="name")
                                         md-input-container.md-block
                                             label Описание акции
-                                            textarea(rows='5', md-select-on-focus='', name="description") {{stock.description}}
+                                            textarea(rows='5', md-select-on-focus='',ng-model='stock.description', name="description") {{stock.description}}
                                         style
                                             include ../public/css/categories.css
                                         div#show_categories
                                             md-input-container.md-block(style="margin-bottom: 0")
                                                 label Категория
-                                                input(value='{{stock.category.name}}' name="category")
+                                                input(value='{{stock.category.name}}')
                                         div#categories
                                         .img_wrapper
                                             img(src="http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}", alt="logo")
@@ -37,9 +40,9 @@ block content
                                         lf-ng-md-file-input(lf-files='files',lf-browse-label="Выбрать", type='file', lf-placeholder='Загрузите новую картинку для акции', name='logo', preview='')
                                         div(layout="row")
                                                 md-datepicker-input-container(flex="50")
-                                                    md-datepicker(ng-model='obj.startDate', md-placeholder='Дата создания акции')
+                                                    md-datepicker(ng-model='stock.startDate', md-placeholder='Дата создания акции')
                                                 md-datepicker-input-container(flex="50")
-                                                    md-datepicker(ng-model='obj.endDate', md-placeholder='Дата окончания акции')
+                                                    md-datepicker(ng-model='stock.endDate', md-placeholder='Дата окончания акции')
 
                                         input(type="hidden", value="{{stock.id}}", name="id")
                                         .button_wrapper
