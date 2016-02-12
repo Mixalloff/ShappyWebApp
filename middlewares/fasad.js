@@ -51,18 +51,19 @@ var execute = function(data,cb) {
         },cb);
     },
 
-    getStatsForStock: function(data,cb) {
-        execute({
-            url: server + "/company/stats/usersperstock",
-            method: "GET",
-            qs: {id: data.id, token: data.token}
-        },cb);
-    },
     getNumberOfSubsribitions: function(data,cb) {
         execute({
             url: server + "/company/stats/countperstock",
             method: "GET",
             qs: {token: data}
+        },cb);
+    },
+
+    getStatsForStock: function(data,cb) {
+        execute({
+            url: server + "/company/stats/usersperstock",
+            method: "GET",
+            qs: {id: data.id, token: data.token}
         },cb);
     },
 

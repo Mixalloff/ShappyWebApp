@@ -96,20 +96,12 @@ class Server {
                 fasad.getStatsForStock(data, (err,stats)=> {
                     fasad.getCategories((err,categories)=> {
                         if (err) return next(err);
-                        console.log(categories);
                         fasad.getStockFunnel(data,(err,funnel)=>
                         {
                             if (err) return next(err);
-                            console.log(funnel);
                             res.render('stock', {
                                 stock: stockInfo.data,
-                                funnel: funnel/* {type:'stockinfo', data: {
-                                    viewsInFeed: 100,
-                                    views: 50,
-                                    subscribes: 20,
-                                    uses: 10,
-                                    reuses: 3
-                                }}*/,
+                                funnel: funnel,
                                 stats: stats,
                                 categories: categories.data
 
@@ -127,7 +119,25 @@ class Server {
                 id: req.params.id
             })
         });
+        app.use('/stocks', function(req,res) {
+            res.render('stocks');
+        });
 
+        app.use('/stats', function(req,res,next) {
+            var token = req.cookies.token;
+            console.log(token);
+            fasad.getCountStocksPerDate(token, (err,stats)=> {
+                if (err) return next(err);
+                fasad.getNumberOfSubsribitions(token, (err,users)=> {
+                    if (err) return next(err);
+                    res.render('stats',
+                        {
+                            stats: stats,
+                            users: users
+                        });
+                });
+            });
+        });
         app.use('/', function(req,res) {
             fasad.getCategories((err,categories)=> {
                 if (err) return next(err);
