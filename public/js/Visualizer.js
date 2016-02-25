@@ -12,9 +12,8 @@ class Visualizer {
 
     static getChartTypeByRequestType(RequestType) {
         var routes = {
-            'stocksperdate': 'line',
-            'usersperstock': 'line',
-            'countperstock': 'pie',
+            'LineChart': 'line',
+            'PieChart': 'pie',
             'stockinfo': 'funnel'
         };
         return routes[RequestType] || 'line';
@@ -32,6 +31,14 @@ class AbstractChart {
         this.stats = stats;
     }
 
+    updateChart(startDate,endDate) {
+        this.stats.updateDate(startDate,endDate);
+        this.generateData();
+        this.parent.removeChild(this.canvas);
+        this.createCanvas(600,200,this.header).appendTo(this.parent.id, true);
+
+    }
+
     createCanvas(width,height,header) {
         this.canvas = document.createElement('canvas');
         this.header = document.createElement('h5');
@@ -44,17 +51,20 @@ class AbstractChart {
         return this.canvas.getContext('2d');
     }
 
-    appendTo(id) {
-        var parent = document.getElementById(id);
-        parent.appendChild(this.header);
-        parent.appendChild(this.canvas);
+    appendTo(id, drawHeader) {
+        this.parent = document.getElementById(id);
+        if (!drawHeader)
+            this.parent.appendChild(this.header);
+        this.parent.appendChild(this.canvas);
         this.fillCanvas();
+        return this;
     }
 }
 
 class LineChart extends AbstractChart {
 
     generateData() {
+
         this.data = {
             labels: this.stats.getX(),
             datasets: [
@@ -71,7 +81,8 @@ class LineChart extends AbstractChart {
 
     fillCanvas() {
         this.generateData();
-        new Chart(this.getCanvas()).Line(this.data);
+        this.chart = new Chart(this.getCanvas()).Line(this.data);
+        return this.chart;
     }
 }
 class PieChart extends  AbstractChart {
@@ -87,11 +98,11 @@ class PieChart extends  AbstractChart {
 
     generateData() {
         this.data=[];
-        for (var item in this.stats.data) {
+        for (var item in this.stats.filtered) {
             var color = PieChart.GetRandomColor();
             this.data.push(
             {
-                value: this.stats.data[item],
+                value: this.stats.filtered[item],
                 color:color,
                 label: item
             }

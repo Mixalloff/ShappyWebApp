@@ -1,18 +1,6 @@
 'use strict';
 
-var app = angular.module('app',['ngMaterial','ngMdIcons','lfNgMdFileInput'])
-.directive("lfFiles", function () {
-    return {
-        link: function (scope, element, attrs) {
-            scope.$watch(attrs.lfFiles, function(val) {
-                scope.logo = val;
-            });
-        }
-    };
-});
-
-$(".fancybox").fancybox();
-app.controller('Stock', function($scope) {
+angular.module('app').controller('Stock', function($scope) {
     $scope.submit = function() {
         var formData =new FormData($("form#edit_stock")[0]);
         formData.append("category",$("form#edit_stock a.active").attr("id"));
@@ -40,22 +28,23 @@ app.controller('Stock', function($scope) {
      $scope.stock.endDate = new Date($scope.stock.endDate);
     };
 
-    $scope.onTabSelected = (tab)=> {
-        if (!enable_graphics)
-        {
-            var statist = Stats.getByType(statistics);
-            var Graphic = Visualizer.getByType(statistics.type);
-            new Graphic(statist).createCanvas(600,200,"Количество добавлений этой акции пользователями по дням").appendTo('charts');
-
-            var funnel_statist = Stats.getByType(funnel_stats);
-            Graphic = Visualizer.getByType(funnel_stats.type);
-            new Graphic(funnel_statist).createCanvas(600,200,"Воронка").appendTo('funnel');
-
-            enable_graphics = true;
-        }
-
-
-    }
+    //$scope.onTabSelected = (tab)=> {
+    //
+    //    if (!enable_graphics)
+    //    {
+    //        var statist = Stats.getByType(statistics);
+    //        var Graphic = Visualizer.getByType(statistics.type);
+    //        new Graphic(statist).createCanvas(600,200,"Количество добавлений этой акции пользователями по дням").appendTo('charts');
+    //
+    //        var funnel_statist = Stats.getByType(funnel_stats);
+    //        Graphic = Visualizer.getByType(funnel_stats.type);
+    //        new Graphic(funnel_statist).createCanvas(600,200,"Воронка").appendTo('funnel');
+    //
+    //        enable_graphics = true;
+    //    }
+    //
+    //
+    //}
 
 });
 

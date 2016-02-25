@@ -1,16 +1,4 @@
 'use strict';
-
-var app = angular.module('app',['ngMaterial','ngMdIcons','lfNgMdFileInput'])
-.directive("lfFiles", function () {
-    return {
-        link: function (scope, element, attrs) {
-            scope.$watch(attrs.lfFiles, function(val) {
-                scope.logo = val;
-            });
-        }
-    };
-});
-
 var menu_items = Config.menuCompanyItems;
 
 $(".menu li").hover(
@@ -24,9 +12,7 @@ $(".menu li").hover(
         var hint = $(this).next().remove();
     }
 );
-
-
-app.controller('Company', function($scope,$mdDialog, $mdMedia) {
+angular.module('app').controller('Company', function($scope,$mdDialog, $mdMedia) {
 
 
     this.isOpen = false;
@@ -104,7 +90,6 @@ function DialogController($scope, $mdDialog, $http, stocks) {
         });
     };
 }
-    $(".fancybox").fancybox();
     //обновление акции
 
     $scope.update = function(stock_id) {
@@ -206,9 +191,9 @@ function DialogController($scope, $mdDialog, $http, stocks) {
     };
     $scope.isDown = function(name) {
         return $scope.sortField == name && $scope.reverse;
-    }
+    };
     $scope.isUp = function(name) {
         return $scope.sortField == name && !$scope.reverse;
-    }
+    };
 
 });

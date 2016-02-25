@@ -66,53 +66,35 @@ class Server {
             fasad.checkToken(token, function(err,companyInfo) {
                 fasad.getStocks(token, function(err,stocks) {
                     if (err) return next(err);
-                    fasad.getCountStocksPerDate(token, (err,stats)=> {
-                        if (err) return next(err);
-                        fasad.getNumberOfSubsribitions(token, function(err,users) {
-                            if (err) return next(err);
+
                             fasad.getCategories((err,categories)=> {
                                 if (err) return next(err);
                                 res.cookie('company_name', companyInfo.data.name, { maxAge: 10e+10 });
                                 res.cookie("company_logo",config.get("api")+companyInfo.data.logo,{ maxAge: 10e+10 });
                                 res.render('company',{
                                     stocks: stocks.data,
-                                    stats: stats,
-                                    users: users,
                                     categories: categories.data
                                 });
-                            })
-
                         });
-                    });
                 });
             });
         });
 
         app.use('/stockinfo/:id', function(req,res,next) {
             var data = {id: req.params.id,
-                        token: req.cookies.token};
-            fasad.getStockInfo(data,(err,stockInfo)=> {
-                if (err) return next(err);
-                fasad.getStatsForStock(data, (err,stats)=> {
+                token: req.cookies.token};
                     fasad.getCategories((err,categories)=> {
                         if (err) return next(err);
-                        fasad.getStockFunnel(data,(err,funnel)=>
-                        {
+                        fasad.getStockInfo(data,(err,stock) => {
                             if (err) return next(err);
+                            console.log(stock);
                             res.render('stock', {
-                                stock: stockInfo.data,
-                                funnel: funnel,
-                                stats: stats,
+                                stock: stock.data,
                                 categories: categories.data
-
                             });
+                           });
                         });
-
                     });
-
-                });
-            });
-        });
 
         app.get('/resend/:id', function(req,res) {
             res.render('resend',{
@@ -122,22 +104,16 @@ class Server {
         app.use('/stocks', function(req,res) {
             res.render('stocks');
         });
-
-        app.use('/stats', function(req,res,next) {
-            var token = req.cookies.token;
-            console.log(token);
-            fasad.getCountStocksPerDate(token, (err,stats)=> {
-                if (err) return next(err);
-                fasad.getNumberOfSubsribitions(token, (err,users)=> {
-                    if (err) return next(err);
-                    res.render('stats',
-                        {
-                            stats: stats,
-                            users: users
-                        });
-                });
+        app.get('/stats/details', function(req,res) {
+            res.render('details', {
+                type: req.query.type,
+                attributes: req.query
             });
         });
+        app.use('/stats', function(req,res) {
+            res.render('stats');
+        });
+
         app.use('/', function(req,res) {
             fasad.getCategories((err,categories)=> {
                 if (err) return next(err);

@@ -1,3 +1,30 @@
-//
-   Created by nikita on 2/25/16.
+extends _layout
+block additional_styles
+    title Статистика
+    link(rel="stylesheet", href="../css/stats.css")
+    link(rel="stylesheet", href="../libs/angular-material/angular-material.css")
+    link(rel="stylesheet", href="../libs/lf-ng-md-file-input/dist/lf-ng-md-file-input.css")
+block content
+    div.statCtrl(ng-controller='Stats', ng-init="init(['#{type}']);")
+        include includes/toolbar
+        .container-fluid
+            div(layout="row")
+                include includes/sidebar
+                div.stats_tabs.md-whiteframe-4dp(flex,flex-offset="20")
+                    include includes/filter
+                    div&attributes(attributes)
+block additional_scripts
+    script(src='../libs/jquery/dist/jquery.min.js')
+    script(src='../libs/angular/angular.min.js')
+    script(src='../libs/angular-animate/angular-animate.js', type='text/javascript')
+    script(src='../libs/angular-aria/angular-aria.js', type='text/javascript')
+    script(src='../libs/angular-material/angular-material.js', type='text/javascript')
+    script(src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.5.0/angular-material-icons.min.js")
+    script(src="../libs/lf-ng-md-file-input/dist/lf-ng-md-file-input.js")
+    script(src="../js/app.js")
+    script(src='../js/controllers/stats.js')
+    script(src='../libs/Chart.js/Chart.js')
+    script(src='../js/Error.js')
+
+
 

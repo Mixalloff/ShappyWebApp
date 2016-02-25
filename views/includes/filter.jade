@@ -1,8 +1,8 @@
-div(id="template")
-    md-button.choose.md-raised(ng-click="getStats('month',$event)") Месяц
-    md-button.choose(ng-click="getStats('week',$event)") Неделя
-    md-button.choose(ng-click="getStats('today',$event)") Сегодня
-    md-button.choose(ng-click="getStats('yesterday',$event)") Вчера
+div(id="filter")
+    md-button.choose.md-raised(ng-click="getStats('month',$event,'#{type}')") Месяц
+    md-button.choose(ng-click="getStats('week',$event,'#{type}')") Неделя
+    md-button.choose(ng-click="getStats('today',$event,'#{type}')") Сегодня
+    md-button.choose(ng-click="getStats('yesterday',$event,'#{type}')") Вчера
     br
-    md-datepicker(ng-model='start',ng-change="updateAll()")
-    md-datepicker(ng-model='end', ng-change="updateAll()")
+    md-datepicker(ng-model='start',ng-change="changeDate('#{type}')")
+    md-datepicker(ng-model='end', ng-change="changeDate('#{type}')")

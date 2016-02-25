@@ -2,21 +2,20 @@ extends _layout
 block additional_styles
     title
     link(rel='stylesheet', href='../css/company.css')
-    link(rel='stylesheet', href='../libs/fancybox/source/jquery.fancybox.css')
+    link(rel='stylesheet', href='../css/stats.css')
     link(rel="stylesheet", href="../libs/angular-material/angular-material.css")
     link(rel="stylesheet", href="../css/categories.css")
     link(rel="stylesheet", href="../libs/lf-ng-md-file-input/dist/lf-ng-md-file-input.css")
 block content
-    div(ng-controller='Company as company',ng-init="stocks= #{JSON.stringify(stocks)}")
+    div(ng-controller='Company',ng-init="stocks= #{JSON.stringify(stocks)}; ")
         include includes/toolbar
         .container-fluid
             div(layout="row")
                 include includes/sidebar
-                div.content(flex="55",flex-offset="20")
-                    .stats.md-whiteframe-4dp
-                        #countAdditionsPerDate
-                    .stats.md-whiteframe-4dp
-                        #countAdditionsPerStock
+                div.content.statCtrl(ng-controller='Stats',ng-init="init(['countperstock']);" flex="55",flex-offset="20")
+                    div(line-graph="stats['countperstock'].filtered",header="Количество добавлений всех акций по дням",type='countperstock')
+                    div(circle-graph="stats['countperstock'].filtered",header="Количество добавлений по каждой акции",type='countperstock')
+
                 div.right_stocks(flex="25")
                     .stock_part
                         .stocks_head
@@ -39,7 +38,7 @@ block content
                                         md-card-title
                                             md-card-title-text
                                                 span.md-headline {{stock.name}}
-                                                md-button.md-fab.md-raised.md-mini(ng-click="showEditDialog($event, stock.id)",aria-label='more_vert',style="padding-top:5px")
+                                                md-button.md-icon-button(ng-click="showEditDialog($event, stock.id)",aria-label='more_vert',style="padding-top:5px")
                                                     ng-md-icon(icon="more_vert")
                                         a.fancybox(href='http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}')
                                             img.md-card-image(ng-src='http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}', alt='stock image')
@@ -48,15 +47,6 @@ block content
                                         md-card-actions(layout='row', layout-align='end center')
                                             md-button(ng-click='go("/stockinfo/",stock.id)') Редактировать
                                             md-button(ng-click='remove(stock.id)')  Удалить
-form#edit
-    h4 Редактирование акции
-    input.form-control(type='text', name='name', placeholder='Заголовок')
-    textarea.form-control(name='description', cols='30', rows='7', placeholder='Текст акции')
-    input.form-control(name='logo', type='file')
-    include  includes/categories
-    input.form-control.date(name='startDate', type='text', placeholder='Дата начала')
-    input.form-control.date(name='endDate', type='text', placeholder='Дата окончания')
-    button.btn.btn-primary(type='submit') Сохранить
 block additional_scripts
     script(src='../libs/jquery/dist/jquery.min.js')
     script(src='../libs/angular/angular.min.js')
@@ -66,26 +56,12 @@ block additional_scripts
     script(src="../libs/lf-ng-md-file-input/dist/lf-ng-md-file-input.js")
     script(src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.5.0/angular-material-icons.min.js")
     script(src='../libs/Chart.js/Chart.js')
-    script(src="../libs/ng-file-upload/ng-file-upload.js")
-    script(src='../libs/fancybox/source/jquery.fancybox.js')
-    script(src='../libs/fancybox/source/jquery.fancybox.pack.js')
+    script(src="../js/app.js")
     script(src='../js/controllers/company.js')
+    script(src='../js/controllers/stats.js')
     script(src='../js/Error.js')
-    script(src='../js/Visualizer.js')
-    script(src="../js/Stats.js")
     script.
-        var stats_data = !{JSON.stringify(stats)};
-        var users_data = !{JSON.stringify(users)};
         var all_categories = !{JSON.stringify(categories)};
-        var stats_obj = Stats.getByType(stats_data);
-        var users_obj = Stats.getByType(users_data);
-
-        var GraphicF = Visualizer.getByType(stats_data.type);
-        var GraphicS = Visualizer.getByType(users_data.type);
-
-        new GraphicF(stats_obj).createCanvas(600, 200, 'Общее количество добавленных пользователями акций').appendTo('countAdditionsPerDate');
-
-        new GraphicS(users_obj).createCanvas(300, 200, 'Количество пользователей по каждой акции').appendTo('countAdditionsPerStock');
     script(type='text/ng-template', id='dialog1.tmpl.html').
 
         <md-dialog aria-label="AddDialog" ng-cloak>

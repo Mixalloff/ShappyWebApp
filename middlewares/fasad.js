@@ -43,29 +43,29 @@ var execute = function(data,cb) {
     },cb);
     },
 
-    getCountStocksPerDate: function(data,cb) {
-        execute({
-            url: server + "/company/stats/stocksperdate",
-            method: "GET",
-            qs: {token: data}
-        },cb);
-    },
+    //getAllStatsByStocks: function(data,cb) {
+    //    execute({
+    //        url: server + "/company/stats/countperstock",
+    //        method: "GET",
+    //        qs: {token: data}
+    //    },cb);
+    //},
 
-    getNumberOfSubsribitions: function(data,cb) {
-        execute({
-            url: server + "/company/stats/countperstock",
-            method: "GET",
-            qs: {token: data}
-        },cb);
-    },
+    //getNumberOfSubsribitions: function(data,cb) {
+    //    execute({
+    //        url: server + "/company/stats/countperstock",
+    //        method: "GET",
+    //        qs: {token: data}
+    //    },cb);
+    //},
 
-    getStatsForStock: function(data,cb) {
-        execute({
-            url: server + "/company/stats/usersperstock",
-            method: "GET",
-            qs: {id: data.id, token: data.token}
-        },cb);
-    },
+    //getStatsForStock: function(data,cb) {
+    //    execute({
+    //        url: server + "/company/stats/usersperstock",
+    //        method: "GET",
+    //        qs: {id: data.id, token: data.token}
+    //    },cb);
+    //},
 
     getStockInfo: function(data,cb) {
         execute({
@@ -80,13 +80,13 @@ var execute = function(data,cb) {
             url: server + "/company/categories/all",
             method: "GET"
         }, cb);
-    },
-    getStockFunnel: function(data,cb) {
-        execute({
-            url: server + "/company/stats/stockinfo",
-            method: "GET",
-            qs: {id: data.id, token: data.token}
-        },cb);
     }
+    //getStockFunnel: function(data,cb) {
+    //    execute({
+    //        url: server + "/company/stats/stockinfo",
+    //        method: "GET",
+    //        qs: {id: data.id, token: data.token}
+    //    },cb);
+    //}
 
 };

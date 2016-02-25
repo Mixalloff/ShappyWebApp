@@ -1,62 +1,92 @@
 'use strict';
 
-class Stats {
-
-    static get routes() {
-    return {
-        'stocksperdate': StocksPerDate,
-        'usersperstock': StocksPerDate,
-        'countperstock': UsersPerStock,
-        'stockinfo':FunnelStock
-    }
-    };
-
-    static getByType(stats) {
-      return new Stats.routes[stats.type](stats.data);
-    }
-
-}
-
 class AbstractStats {
 
     static get daysPerMonth() {
         return [31,29,31,30,31,30,31,31,30,31,30,31];
     };
 
-    constructor(data) {
+    constructor(data, startDate, endDate) {
         this.data = data;
         this.DataX = [];
         this.DataY = [];
-        this.init(data);
+        this.filtered={};
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
+
+    filter(start,end){
+        Object.keys(this.filtered).forEach((stock)=> {
+            this.filtered[stock] = this.filterDateArray(this.filtered[stock],start,end);
+        });
+    }
+
+    filterDateArray(dates,start,end) {
+        return dates.filter((date)=> {
+            date = new Date(date);
+            return date>=new Date(start) && date<=new Date(end);
+        })
+    }
+
+    updateDate(startDate,endDate) {
+        this.filtered = this.data;
+        this.filter(startDate,endDate);
+        this.init(startDate,endDate);
+    }
+
     getX() {
-        return this.DataX;
+        return this.DataX; //po start date end date
     }
 
     getY() {
         return this.DataY
     }
 
+
 }
 
-class StocksPerDate extends  AbstractStats{
+class StocksPerDate extends  AbstractStats
+{
+    init(startDate,endDate) {
 
-    init(data) {
-        for(var i = 1; i <= AbstractStats.daysPerMonth[new Date().getMonth()]; i++) {
-            this.DataX.push(i);
-            this.DataY.push(0);
+        this.generate();
+
+        var fillDate = {};
+
+        for (var i = new Date(startDate); i <= endDate; i.setDate(i.getDate()+1)) {
+
+            var day = i.toDateString();
+            var data = this.filtered[day];
+            fillDate[i.toLocaleString().split(' ')[0]] = data || 0;
         }
-        for(var item in data) {
-            this.DataY[new Date(item).getDate()-1] = data[item];
-        }
+
+        this.DataX = [];
+        this.DataY = [];
+
+        Object.keys(fillDate).forEach((item)=> {
+            this.DataX.push(item);
+            this.DataY.push(fillDate[item]);
+        });
+    }
+    generate() {
+            var result = {};
+            Object.keys(this.filtered).forEach((stock)=> {
+                this.filtered[stock].forEach((date)=> {
+                    if (!result[date]) result[date]=1; else  result[date] += 1;
+                    result[date] = result[date] + 1 || 1;
+                });
+            });
+            this.filtered = result;
     }
 }
 
 
 class UsersPerStock extends  AbstractStats{
 
-    init(data) {
-       this.data = data;
+    init(startDate,endDate) {
+        Object.keys(this.filtered).map((value) => {
+            this.filtered[value] = this.filtered[value].length;
+        });
     }
 }
 
