@@ -148,45 +148,43 @@ function DialogController($scope, $mdDialog, $http, stocks) {
 
     //удаление акции
 
-    $scope.remove = function(stock_id) {
-        var response = confirm("Вы действительно хотите удалить акцию?");
-        if (response) {
-            $.ajax({
-                type: "post",
-                url: Config.removeStock,
-                data: {token: getCookie("token"), id: stock_id}
-            }).success(function (data) {
-                $scope.stocks.forEach(function(item,index) {
-                    if (item['id']==stock_id)
-                    {
-                        $scope.stocks.splice(index,1);
-                    }
+    $scope.remove = function(ev,stock_id) {
+            var confirm = $mdDialog.confirm()
+                .title('Вы действительно хотите удалить акцию?')
+                .ariaLabel('Lucky day')
+                .targetEvent(ev)
+                .ok('Да')
+                .cancel('Нет');
+            $mdDialog.show(confirm).then(function() {
+                $.ajax({
+                    type: "post",
+                    url: Config.removeStock,
+                    data: {token: getCookie("token"), id: stock_id}
+                }).success(function (data) {
+                    $scope.stocks.forEach(function(item,index) {
+                        if (item['id']==stock_id)
+                        {
+                            $scope.stocks.splice(index,1);
+                        }
+                    });
+                    $scope.$apply();
+                    alertify.notify(Config.mesSuccessRemoveStock, 'success');
+                }).error(function (data) {
+                    alertify.notify(Config.mesWrongRemoveStock, 'error');
                 });
-                $scope.$apply();
-                alertify.notify(Config.mesSuccessRemoveStock, 'success');
-            }).error(function (data) {
-                alertify.notify(Config.mesWrongRemoveStock, 'error');
+            }, function() {
             });
-        }
-    };
+        };
     $scope.go = function ( path,param ) {
         window.location.href=path + param;
     };
     //сортировка акции по дате
     $scope.sortField = 'startDate';
-    $scope.reverse  = false;
+    $scope.reverse  = true;
 
     $scope.sort = function(name)
     {
-        if ($scope.sortField == name)
-        {
-            $scope.reverse = !$scope.reverse;
-        }
-        else
-        {
-            $scope.sortField = name;
-            $scope.reverse = true;
-        }
+        $scope.reverse = !$scope.reverse;
     };
     $scope.isDown = function(name) {
         return $scope.sortField == name && $scope.reverse;
@@ -194,5 +192,12 @@ function DialogController($scope, $mdDialog, $http, stocks) {
     $scope.isUp = function(name) {
         return $scope.sortField == name && !$scope.reverse;
     };
+    $scope.prepareStocks= () => {
+        $scope.stocks.forEach((stock)=> {
+            stock.startDate = new Date(stock.startDate);
+            stock.endDate = new Date(stock.endDate);
+        })
+    }
+
 
 });

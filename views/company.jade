@@ -7,7 +7,7 @@ block additional_styles
     link(rel="stylesheet", href="../css/categories.css")
     link(rel="stylesheet", href="../libs/lf-ng-md-file-input/dist/lf-ng-md-file-input.css")
 block content
-    div(ng-controller='Company',ng-init="stocks= #{JSON.stringify(stocks)}; ")
+    div(ng-controller='Company',ng-init="stocks= #{JSON.stringify(stocks)}; prepareStocks(); ")
         include includes/toolbar
         .container-fluid
             div(layout="row")
@@ -46,7 +46,7 @@ block content
                                         md-card-content {{stock.description}}
                                         md-card-actions(layout='row', layout-align='end center')
                                             md-button(ng-click='go("/stockinfo/",stock.id)') Редактировать
-                                            md-button(ng-click='remove(stock.id)')  Удалить
+                                            md-button(ng-click='remove($event,stock.id)')  Удалить
 block additional_scripts
     script(src='../libs/jquery/dist/jquery.min.js')
     script(src='../libs/angular/angular.min.js')
