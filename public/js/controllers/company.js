@@ -15,8 +15,8 @@ $(".menu li").hover(
 angular.module('app').controller('Company', function($scope,$mdDialog, $mdMedia) {
 
 
-    this.isOpen = false;
-    this.selectedMode = 'md-fling';
+    $scope.isOpen = true;
+    $scope.selectedMode = 'md-fling';
 
     $scope.showDialog = (ev,id) => {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
@@ -82,7 +82,6 @@ function DialogController($scope, $mdDialog, $http, stocks) {
                 new_obj['id'] = resultJSON.data.id;
                 new_obj['logo'] = resultJSON.data.logo;
                 $scope.stocks.unshift(new_obj);
-                $scope.$apply();
                 $scope.hide();
             }
         }, function errorCallback(response) {
@@ -175,7 +174,7 @@ function DialogController($scope, $mdDialog, $http, stocks) {
     };
     //сортировка акции по дате
     $scope.sortField = 'startDate';
-    $scope.reverse  = true;
+    $scope.reverse  = false;
 
     $scope.sort = function(name)
     {

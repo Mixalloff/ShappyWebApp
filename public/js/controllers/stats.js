@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('app').controller('Stats', function($scope,$http) {
-
+    $scope.isOpen = true;
+    $scope.selectedMode = 'md-fling';
 
     $scope.numbers = [31,29,31,30,31,30,31,31,30,31,30,31];
     $scope.showDetail = (ev)=> {

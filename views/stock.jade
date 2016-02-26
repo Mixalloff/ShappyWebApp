@@ -50,7 +50,7 @@ block content
                             md-tab(label='Статистика')
                                 md-content.md-padding
                                     #graphics.statCtrl(ng-controller='Stats',ng-init="init(['usersperstock','stockinfo'],{id: stock.id})")
-                                        div(funnel-graph="stats['stockinfo'].filtered",header="Воронка",class="funnel")
+                                        div(funnel-graph="stats['stockinfo'].filtered",header="Воронка",class="funnel",type='stockinfo')
                                         //#charts
 
 block additional_scripts

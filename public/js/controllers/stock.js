@@ -1,6 +1,9 @@
 'use strict';
 
 angular.module('app').controller('Stock', function($scope) {
+
+    $scope.isOpen = true;
+    $scope.selectedMode = 'md-fling';
     $scope.submit = function() {
         var formData =new FormData($("form#edit_stock")[0]);
         formData.append("category",$("form#edit_stock a.active").attr("id"));
