@@ -67,10 +67,6 @@ var app = angular.module('app',['ngMaterial','ngMdIcons','lfNgMdFileInput'])
             }
         }
     })
-
-
-
-
     .directive("lineGraph", function() {
 
         return {
@@ -113,7 +109,6 @@ var app = angular.module('app',['ngMaterial','ngMdIcons','lfNgMdFileInput'])
                 };
 
                 scope.$watch(attrs.lineGraph, function(newVal, oldVal){
-                    console.log("newVal",newVal); console.log("oldVal",oldVal);
                     if (newVal!==oldVal)
                     {
                         var val = parseLineStats(newVal);
@@ -224,6 +219,8 @@ var app = angular.module('app',['ngMaterial','ngMdIcons','lfNgMdFileInput'])
                 },true);
             }
         }
-    })
+    });
+
+    var stockApp = angular.module('stockApp',['app','wu.masonry']);
 
 

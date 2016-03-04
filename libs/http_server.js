@@ -102,7 +102,14 @@ class Server {
             })
         });
         app.use('/stocks', function(req,res) {
-            res.render('stocks');
+            var token = req.cookies.token;
+            fasad.getStocks(token, (err,stocks)=> {
+                if (err) return next(err);
+                res.render('stocks', {
+                    stocks: stocks.data
+                });
+            });
+
         });
         app.get('/stats/details', function(req,res) {
             res.render('details', {

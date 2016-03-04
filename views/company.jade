@@ -2,7 +2,7 @@ extends _layout
 block additional_styles
     title
     link(rel='stylesheet', href='../css/company.css')
-    link(rel='stylesheet', href='../css/stats.css')
+    link(rel='stylesheet', href='../css/common_stats.css')
     link(rel="stylesheet", href="../libs/angular-material/angular-material.css")
     link(rel="stylesheet", href="../css/categories.css")
     link(rel="stylesheet", href="../libs/lf-ng-md-file-input/dist/lf-ng-md-file-input.css")
@@ -12,7 +12,7 @@ block content
         .container-fluid
             div(layout="row")
                 include includes/sidebar
-                div.content.statCtrl(ng-controller='Stats',ng-init="init(['countperstock']);" flex="55",flex-offset="20")
+                div.content.companyStats(ng-controller='Stats',ng-init="init(['countperstock']);" flex="55",flex-offset="20")
                     div(line-graph="stats['countperstock'].filtered",header="Количество добавлений всех акций по дням",type='countperstock')
                     div(circle-graph="stats['countperstock'].filtered",header="Количество добавлений по каждой акции",type='countperstock')
 
@@ -38,8 +38,6 @@ block content
                                         md-card-title
                                             md-card-title-text
                                                 span.md-headline {{stock.name}}
-                                                md-button.md-icon-button(ng-click="showEditDialog($event, stock.id)",aria-label='more_vert',style="padding-top:5px")
-                                                    ng-md-icon(icon="more_vert")
                                         a.fancybox(href='http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}')
                                             img.md-card-image(ng-src='http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}', alt='stock image')
 

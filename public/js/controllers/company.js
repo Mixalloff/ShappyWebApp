@@ -15,8 +15,8 @@ $(".menu li").hover(
 angular.module('app').controller('Company', function($scope,$mdDialog, $mdMedia) {
 
 
-    $scope.isOpen = true;
-    $scope.selectedMode = 'md-fling';
+    $scope.isOpen = false;
+    $scope.selectedMode = 'md-scale';
 
     $scope.showDialog = (ev,id) => {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
@@ -45,9 +45,6 @@ angular.module('app').controller('Company', function($scope,$mdDialog, $mdMedia)
     };
     $scope.showAddDialog = function(ev) {
         $scope.showDialog(ev,null);
-    };
-    $scope.showEditDialog = function(ev, id) {
-        $scope.showDialog(ev,id);
     };
 
 function DialogController($scope, $mdDialog, $http, stocks) {

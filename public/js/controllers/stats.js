@@ -103,8 +103,14 @@ angular.module('app').controller('Stats', function($scope,$http) {
     };
 
     $scope.update = (route) => {
-        var filtered = $scope.filter($scope.stats[route].source);
-        $scope.stats[route].filtered = filtered;
+        if (route=='stockinfo')
+        {
+            $scope.stats[route].filtered =   $scope.stats[route].source;
+        }
+        else {
+            var filtered = $scope.filter($scope.stats[route].source);
+            $scope.stats[route].filtered = filtered;
+        }
     };
 
     $scope.changeDate = (route) => {
@@ -121,8 +127,9 @@ angular.module('app').controller('Stats', function($scope,$http) {
 
     $scope.addLegenda = (parent,val) => {
         var legenda = document.createElement('div');
-        parent.appendChild(legenda);
         legend(legenda, val);
+        parent.appendChild(legenda);
+
     };
 
     $scope.addHeader = (parent,val) => {

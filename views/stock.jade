@@ -2,7 +2,7 @@ extends _layout
 block additional_styles
     title #{stock.name}
     link(rel="stylesheet", href="../css/stock.css")
-    link(rel="stylesheet", href="../css/stats.css")
+    link(rel="stylesheet", href="../css/common_stats.css")
     link(rel='stylesheet', href='../libs/fancybox/source/jquery.fancybox.css')
     link(rel="stylesheet", href="../libs/angular-material/angular-material.css")
     link(rel="stylesheet", href="../libs/lf-ng-md-file-input/dist/lf-ng-md-file-input.css")
@@ -49,10 +49,10 @@ block content
                                             md-button.md-raised.md-primary(type='submit') Сохранить
                             md-tab(label='Статистика')
                                 md-content.md-padding
-                                    #graphics.statCtrl(ng-controller='Stats',ng-init="init(['usersperstock','stockinfo'],{id: stock.id})")
-                                        div(funnel-graph="stats['stockinfo'].filtered",header="Воронка",class="funnel",type='stockinfo')
-                                        //#charts
-
+                                    #graphics.statCtrl(ng-controller='Stats',ng-init="init(['usersperstock','numberofuses','stockinfo'],{id: stock.id})")
+                                        div(funnel-graph="stats['stockinfo'].filtered",header="Воронка",class="funnel", type='stockinfo')
+                                        div(line-graph="stats['usersperstock'].filtered",header="Количество добавлений по дням",type='usersperstock')
+                                        div(line-graph="stats['numberofuses'].filtered",header="Количество использований по дням",type='numberofuses')
 block additional_scripts
         script(src='../libs/jquery/dist/jquery.min.js')
         script(src='../libs/angular/angular.min.js')

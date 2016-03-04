@@ -1,6 +1,7 @@
 extends _layout
 block additional_styles
     title Статистика
+    link(rel="stylesheet", href="../css/common_stats.css")
     link(rel="stylesheet", href="../css/stats.css")
     link(rel="stylesheet", href="../libs/angular-material/angular-material.css")
     link(rel="stylesheet", href="../libs/lf-ng-md-file-input/dist/lf-ng-md-file-input.css")
@@ -14,14 +15,16 @@ block content
                         md-tabs(md-dynamic-height='', md-border-bottom='')
                             md-tab(label='Добавление в профиль')
                                 md-content.md-padding(flex)
-                                    div(line-graph="stats['countperstock'].filtered",header="Количество добавлений всех акций по дням")
-                                    div(circle-graph="stats['countperstock'].filtered",header="Количество добавлений по каждой акции")
+                                    div(line-graph="stats['countperstock'].filtered",header="Количество добавлений всех акций по дням",type='countperstock')
+                                    div(circle-graph="stats['countperstock'].filtered",header="Количество добавлений по каждой акции",type='countperstock')
 
                             md-tab(label="Подписки на компанию")
                                 md-content.md-padding
+
                             md-tab(label="Использование акций")
                                 md-content.md-padding
-                                div(line-graph="stats['numberofuses']",header="Количество использований всех акций по дням")
+                                    div(line-graph="stats['numberofuses'].filtered",header="Количество использований всех акций по дням",type='numberofuses')
+                                    div(circle-graph="stats['numberofuses'].filtered",header="Количество использований по каждой акции",type='numberofuses')
 block additional_scripts
     script(src='../libs/jquery/dist/jquery.min.js')
     script(src='../libs/angular/angular.min.js')
