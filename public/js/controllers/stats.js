@@ -97,6 +97,7 @@ angular.module('app').controller('Stats', function($scope,$http) {
             var route_part = route.split('/').pop();
             $scope.getMonth();
             $scope.stats[route_part]={};
+            console.log(response);
             $scope.stats[route_part].source = response.data.data;
             $scope.update(route_part);
         });
@@ -105,6 +106,7 @@ angular.module('app').controller('Stats', function($scope,$http) {
     $scope.update = (route) => {
         if (route=='stockinfo')
         {
+            console.log($scope.stats[route].source);
             $scope.stats[route].filtered =   $scope.stats[route].source;
         }
         else {

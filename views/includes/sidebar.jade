@@ -3,14 +3,15 @@ style
 md-sidenav.site-sidenav.md-whiteframe-4dp.menu(md-is-locked-open='true',flex='20')
     md-list
         md-list-item
-            md-button(href="/company")
+            md-button.point(href="/company")
                 md-icon.icon(md-font-icon='fa fa-home')
                 |                   Домашняя страница
         md-list-item
-            md-button(href="/stocks")
+            md-button.point(href="/stocks")
                 md-icon.icon(md-font-icon='fa fa-file')
                 |                   Акции
         md-list-item
-            md-button(href="/stats")
+            md-button.point(href="/stats")
                 md-icon.icon(md-font-icon='fa fa-bar-chart')
                 |                   Статистика
+        block filter

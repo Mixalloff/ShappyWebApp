@@ -3,7 +3,7 @@
     position: fixed !important;
     margin-top: 64px;
 }
-.menu .md-button {
+.menu .md-button.point {
     width: 100%;
     text-align: left;
     height: 55px;
@@ -11,11 +11,31 @@
     font-size: 13px;
     font-weight: bold;
 }
-.menu .md-button:hover,.menu .md-button:active, .menu .md-button:visited {
+.menu .md-button.point:hover,.menu .md-button.point:active, .menu .md-button.point:visited {
     color: #000000;
 }
-.menu .md-button .icon {
+.menu .md-button.point .icon {
     font-size: 30px;
     margin-right: 30px;
     width: 25px;
+}
+.filter {
+    margin:0 10px;
+}
+.filter p{
+    text-transform: uppercase;
+    font-size: 15px;
+    text-align: center;
+}
+.filter md-input-container  {
+    font-size: 12px;
+    margin: 0;
+}
+
+.filter md-input-container label {
+    font-size: 12px;
+}
+
+.md-datepicker-input-container {
+    width: 122px !important
 }

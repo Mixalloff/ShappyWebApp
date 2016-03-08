@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('stockApp').controller('AllStocks', function($scope,$http) {
+angular.module('stockApp').controller('AllStocks', function($scope,$http,$mdDialog) {
 
     $scope.prepareStocks= () => {
         $scope.stocks.forEach((stock)=> {
@@ -10,11 +10,26 @@ angular.module('stockApp').controller('AllStocks', function($scope,$http) {
             }).then(response=> {
               stock.stats = response.data.data;
             });
-            stock.startDate = new Date(stock.startDate);
-            stock.endDate = new Date(stock.endDate);
+            stock.startDate = new Date(stock.startDate).getTime();
+            stock.endDate = new Date(stock.endDate).getTime();
         });
     };
 
-    $scope.bricks = ['../../img/emailerror.jpg','../../img/logo.png','../../img/googleplay.png'];
+    $scope.changeStart = () => {
+        $scope.search.startDate = $scope.search.startDate.getTime();
+    };
+
+    $scope.changeEnd = () => {
+        $scope.search.endDate = $scope.search.endDate.getTime();
+    };
+
+    $scope.getFullDescription = (description) => {
+        var confirm = $mdDialog.confirm()
+            .title('Описание акции')
+            .textContent(description)
+            .ariaLabel('Description')
+            .ok('ЗАКРЫТЬ');
+        $mdDialog.show(confirm);
+    }
 });
 

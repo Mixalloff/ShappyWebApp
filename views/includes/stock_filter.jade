@@ -1,0 +1,13 @@
+extends  sidebar
+block filter
+    div.filter
+        p Фильтр
+        div(layout="column",flex)
+            md-input-container.md-block
+                input(ng-model='search.name',placeholder="Название акции")
+            md-input-container.md-block
+                textarea(rows='5', md-select-on-focus='', placeholder="Описание акции",ng-model='search.description')
+            md-datepicker-input-container
+                md-datepicker(ng-model='search.startDate', md-placeholder="Дата начала",ng-change="changeStart()")
+            md-datepicker-input-container
+                md-datepicker(ng-model='search.endDate', md-placeholder="Дата окончания",ng-change="changeEnd()")

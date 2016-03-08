@@ -10,10 +10,10 @@ block content
         include includes/toolbar
         .container-fluid
             div(layout="row")
-                include includes/sidebar
+                include includes/stock_filter
                 div.mas(masonry='',flex,flex-offset="20")
                     div(layout="row")
-                        .masonry-brick(ng-repeat='stock in stocks',flex="33")
+                        .masonry-brick(ng-repeat='stock in stocks | filter:{name: search.name, description: search.description,startDate: search.startDate, endDate: search.endDate}',flex="33")
                             p.dates {{stock.startDate| date:'dd/MM/yyyy'}} - {{stock.endDate | date:'dd/MM/yyyy'}}
                             md-card
                                md-card-title
@@ -28,7 +28,8 @@ block content
                                        span.md-headline {{stock.name}}
                                a.fancybox(href='http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}')
                                    img.md-card-image(ng-src='http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080{{stock.logo}}', alt='stock image')
-                                md-card-content {{stock.description | limitTo:100}}...
+                                md-card-content
+                                div(ng-click="getFullDescription(stock.description)") {{stock.description | limitTo:100}}...
                                 md-card-actions(ng-controller="Company", layout='row', layout-align='end center')
                                    md-button(ng-click='go("/stockinfo/",stock.id)') Редактировать
                                    md-button(ng-click='remove($event,stock.id)')  Удалить
