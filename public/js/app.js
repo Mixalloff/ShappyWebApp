@@ -166,9 +166,8 @@ var app = angular.module('app',['ngMaterial','ngMdIcons','lfNgMdFileInput'])
                 };
 
                 var convertToPercent = (data) => {
-                    var sum_users = Object.keys(data).reduce((pv,cv)=> {
-                        return pv + data[cv];
-                    },0);
+                    var sum_users = data.viewsInFeed;
+
                     Object.keys(data).forEach((item)=>{
                         data[item]=Math.round(data[item]/sum_users*100);
                     });
