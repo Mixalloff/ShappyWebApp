@@ -1,0 +1,14 @@
+{
+  "name": "Chart.js.legend",
+  "homepage": "https://github.com/bebraw/Chart.js.legend",
+  "version": "0.3.0",
+  "_release": "0.3.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.3.0",
+    "commit": "455413736511965f8c010324248cd03e9f64ad83"
+  },
+  "_source": "https://github.com/bebraw/Chart.js.legend.git",
+  "_target": "~0.3.0",
+  "_originalSource": "https://github.com/bebraw/Chart.js.legend.git"
+}

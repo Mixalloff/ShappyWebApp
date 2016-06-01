@@ -160,7 +160,7 @@ class Server {
     run() {
         this.init();
         app.listen(this.port, () => {
-            console.log("Сервер запущен");
+            console.log("Сервер запущен на порту " + this.port);
         });
     }
 }

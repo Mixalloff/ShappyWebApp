@@ -7,7 +7,7 @@ block additional_styles
     link(rel="stylesheet", href="../css/categories.css")
     link(rel="stylesheet", href="../libs/lf-ng-md-file-input/dist/lf-ng-md-file-input.css")
 block content
-    div(ng-controller='Company',ng-init="stocks= #{JSON.stringify(stocks)}; prepareStocks(); ")
+    div(ng-controller='Company',ng-init="stocks= #{JSON.stringify(stocks)}; prepareStocks(); ", ng-cloak)
         include includes/toolbar
         .container-fluid
             div(layout="row")
